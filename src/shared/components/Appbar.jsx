@@ -9,7 +9,7 @@ const Appbar = () => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
   const handleLogin = () => {
     if (!isAuthenticated) loginWithRedirect();
-    else logout();
+    else logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
   return (
