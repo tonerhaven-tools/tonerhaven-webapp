@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESnext",
+    "useDefineForClassFields": false,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*", "./dist/*"],
+      "pages/*": ["./src/pages/*"],
+      "components/*": ["./src/shared/components/*"],
+      "hooks/*": ["./src/shared/hooks/*"],
+      "utils/*": ["./src/shared/utils/*"]
+    }
+  },
+  "include": ["src"],
+}
