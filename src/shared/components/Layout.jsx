@@ -1,11 +1,15 @@
 import Props from "prop-types";
 import Appbar from "./Appbar";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
     <>
       <Appbar />
-      {children}
+      <div style={{minHeight:'700px'}}>
+        {children}
+      </div>
+      <Footer/>
     </>
   );
 };
