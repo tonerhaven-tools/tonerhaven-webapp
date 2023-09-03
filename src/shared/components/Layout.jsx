@@ -6,9 +6,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Appbar />
-      <div style={{minHeight:'700px'}}>
-        {children}
-      </div>
+      {children}
       <Footer/>
     </>
   );
