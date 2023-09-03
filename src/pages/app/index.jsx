@@ -20,6 +20,7 @@ const Root = () => {
               </div>
               <div className="mt-3">
                 <a href="/products" style={{width:"200px",marginBottom:"5px"}} className="call-to-action btn btn-primary">Products</a>
+                &nbsp;&nbsp;
                 <a href="/categories" style={{width:"200px",marginBottom:"5px"}} className="call-to-action btn">Categories</a>
               </div>
             </div>
