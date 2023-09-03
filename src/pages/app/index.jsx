@@ -1,19 +1,35 @@
 import { Layout, Page } from "@/shared/components";
-import { useAuth0 } from "@auth0/auth0-react";
 import { Container } from "react-bootstrap";
 
 const Root = () => {
-  const { user, isAuthenticated } = useAuth0();
 
   return (
     <Page title={"Toner Haven | Your one stop shop for toners!"}>
       <Layout>
         <Container>
-          {isAuthenticated ? (
-            <h1>Welcome {user.nickname ?? ""}</h1>
-          ) : (
-            <h1>Welcome to TonerHaven!</h1>
-          )}
+          <div className="row">
+            <div className="col-md-5">
+              <div className="middle-center mt-5">
+                <div className="mt-5">
+                  <div style={{fontSize: "40px"}}>OEM and Compatible <br/>
+                    <span className="text-blue">Toners</span> and
+                    <span className="text-blue">Parts</span>
+                  </div>
+                  <h5 className="mt-3">We sell toners, parts, and supplies for printers at a very affordable price. Lowest in the market! </h5>
+                </div>
+              </div>
+              <div className="mt-3">
+                <a href="/products" style={{width:"200px",marginBottom:"5px"}} className="call-to-action btn btn-primary">Products</a>
+                <a href="/categories" style={{width:"200px",marginBottom:"5px"}} className="call-to-action btn">Categories</a>
+              </div>
+            </div>
+            <div className="col-md-7">
+              <div className="middle-center mt-5" style={{height:"400px"}}>
+                <img style={{maxWidth:"500px"}} src="/images/svgs/Creativity-bro.svg" className="img-responsive"/>
+              </div>
+            </div>
+          </div>
+
         </Container>
       </Layout>
     </Page>
