@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+html, body {
+  font-family: "Nunito", "sans-serif"
+}
+
+body {
+  background-image: url("/images/home-shape.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.img-responsive {
+  width: 100%;
+}
+
+.middle-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-blue {
+  color: #005cff;
+}
+.text-red {
+  color: #ff0033;
+}
+.btn {
+  border-radius: 5px;
+}
+.btn.call-to-action {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  border: 1px solid #005cff;
+  color: #005cff
+}
+
+.btn.call-to-action:hover {
+  background: #0a57e0;
+  color: #ffffff;
+  border: 1px solid #005cff
+}
+
+.btn.btn-primary {
+  color: #ffffff;
+  background: #005cff;
+  border: 1px solid #005cff
+}
+
+.btn.btn-primary:hover {
+  background: #0a57e0;
+  color: #ffffff;
+}
+
+.very-boring-box {
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+}
+
+.component-title {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between
+}
+
+/* Hide the woo test stuff */
+.woocommerce-notices-wrapper {
+  display: none;
+}
+
+.product-thumbnail {
+  width: 100px;
+}
+
+
+/* Footer Section */
+.footer {
+  background: rgb(208, 206, 250);
+  background: linear-gradient(122deg, rgb(255 255 255) 0%, rgb(198 197 208 / 24%) 100%);
+  border-top: 1px solid #d1d1d1;
+}
+
+.footer .footer-contents {
+  padding: 100px 0;
+}
+
+.footer .footer-rights {
+  padding: 10px 0;
+}
+
+.footer .footer-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/*  WP Forms */
+.wpforms-field-container {
+  padding: 20px;
+  background: #fff;
+  box-shadow: 10px 15px 25px #eeeeee;
+}
+
+.wpforms-field {
+  border: none !important;
+  background: none;
+}
+
+.wpforms-field input,
+.wpforms-field textarea {
+  border: 1px solid #d1d1d1;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.wpforms-submit {
+  padding: 10px 20px;
+  width: 200px;
+  margin: auto;
+  display: block;
+  border: none;
+  background: #0074ff;
+  color: #ffffff;
+}
+
+.wpforms-submit:hover {
+  background: #0e6fe4
+}
