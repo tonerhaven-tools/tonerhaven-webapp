@@ -45,21 +45,28 @@ const Appbar = () => {
             <a href="/cart" className="nav-link" id="num_cart_items"> 🛒 Cart (<span>0</span>)
             </a>
           </li>
-          <li className="nav-item dropdown">
-            <a onClick={ToggleDropdown} className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {isAuthenticated && (
-                <span>
+          {isAuthenticated ? (
+            <li className="nav-item dropdown">
+              <a onClick={ToggleDropdown} className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {isAuthenticated && (
+                  <span>
                   Howdy, {user.nickname ?? ""}!
                 </span>
-              )}
-            </a>
-            <div className={userDropdown?'dropdown-menu show':'dropdown-menu'} aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">My Profile</a>
-              <a className="dropdown-item" href="#">Orders</a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#" onClick={handleLogin}>Logout</a>
-            </div>
-          </li>
+                )}
+              </a>
+              <div className={userDropdown?'dropdown-menu show':'dropdown-menu'} aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">My Profile</a>
+                <a className="dropdown-item" href="#">Orders</a>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="#" onClick={handleLogin}>Logout</a>
+              </div>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <a href="#" onClick={handleLogin} className="nav-link" id="num_cart_items"> Login
+              </a>
+            </li>
+          )}
         </ul>
 
         <Navbar.Toggle />
