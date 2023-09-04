@@ -18,7 +18,20 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
 }) => {
     const { isAuthenticated, isLoading, user } = useAuth0();
 
-    if (isLoading) return <div>Verifying account</div>;
+    if (isLoading)
+        return (
+            <>
+                <Appbar />
+                <CompleteProfilePrompt
+                    profileCompleted={false}
+                    authenticated={isAuthenticated}
+                />
+                <Container>
+                    <div>Authenticating, please wait...</div>
+                </Container>
+                <Footer />
+            </>
+        );
 
     return (
         <>

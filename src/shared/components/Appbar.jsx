@@ -25,7 +25,7 @@ const Appbar = () => {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary justify-content-between">
+    <Navbar expand="sm" className="bg-body-tertiary justify-content-between">
       <Container>
         <Navbar.Brand>
           <Link to={"/"} className={"navbar-brand"}>

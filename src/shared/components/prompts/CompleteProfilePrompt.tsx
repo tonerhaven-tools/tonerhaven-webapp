@@ -11,7 +11,7 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
     profileCompleted,
 }) => {
     if (
-        window.location.pathname === "/app/profile" ||
+        window.location.pathname.indexOf("/app/profile") !== -1 ||
         window.location.pathname === "/"
     )
         return;
