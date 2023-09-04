@@ -1,5 +1,6 @@
 import { Layout, Page } from "@/shared/components";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Root = () => {
   return (
@@ -22,21 +23,21 @@ const Root = () => {
                 </div>
               </div>
               <div className="mt-3">
-                <a
-                  href="/products"
+                <Link
                   style={{ width: "200px", marginBottom: "5px" }}
                   className="call-to-action btn btn-primary"
+                  to={"/app/products"}
                 >
                   Products
-                </a>
+                </Link>
                 &nbsp;&nbsp;
-                <a
-                  href="/categories"
+                <Link
                   style={{ width: "200px", marginBottom: "5px" }}
                   className="call-to-action btn"
+                  to={"/app/categories"}
                 >
                   Categories
-                </a>
+                </Link>
               </div>
             </div>
             <div className="col-md-7">
