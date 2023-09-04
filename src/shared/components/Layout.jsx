@@ -11,17 +11,10 @@ const RenderLoading = () => {
 };
 
 const Layout = ({ children }) => {
-  const location = useLocation();
-
-  const [isMounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, [location.pathname]);
-
   return (
     <>
       <Appbar />
-      {!isMounted ? RenderLoading() : <Container>{children}</Container>}
+      <Container>{children}</Container>
       <Footer />
     </>
   );

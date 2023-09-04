@@ -29,32 +29,37 @@ const Appbar = () => {
     <Navbar expand="lg" className="bg-body-tertiary justify-content-between">
       <Container>
         <Navbar.Brand>
-          <a className={"navbar-brand"} href={"/"}>
+          <Link to={"/"} className={"navbar-brand"}>
             <Logo />
-          </a>
+          </Link>
         </Navbar.Brand>
 
         {/* Navbar Left */}
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/app/products" tabIndex="-1">
+            <Link className="nav-link" tabIndex="-1" to={"/products"}>
               Products
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/app/contact-us" tabIndex="-1">
+            <Link className="nav-link" tabIndex="-1" to={"/contact-us"}>
               Contact Us
-            </a>
+            </Link>
           </li>
         </ul>
 
         {/* Navbar Right */}
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">
-            <a href="/app/cart" className="nav-link" id="num_cart_items">
+            <Link
+              id="num_cart_items"
+              className="nav-link"
+              tabIndex="-1"
+              to={"/cart"}
+            >
               {" "}
               🛒 Cart (<span>0</span>)
-            </a>
+            </Link>
           </li>
           {isAuthenticated ? (
             <li className="nav-item dropdown">
