@@ -19,7 +19,11 @@ const Layout = ({ children }) => {
         authenticated={isAuthenticated}
         isVerified={user?.email_verified ?? false}
       />
-      <Container>{children}</Container>
+      <Container>
+        <div className="content-spacer">
+          {children}
+        </div>
+      </Container>
       <Footer />
     </>
   );
