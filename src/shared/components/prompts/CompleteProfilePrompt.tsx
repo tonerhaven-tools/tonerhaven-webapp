@@ -22,11 +22,11 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
 
     return (
         <Container>
-            <Alert variant="light" className=" p-3">
+            <Alert variant="warning" className=" p-3">
                 Great to have you here! To make your experience even better, please take
                 a moment to complete your profile information. 😊{" "}
                 <Link className="btn btn-sm btn-outline-dark m-2" to={"/app/profile"}>
-                    Manage my profile
+                    Manage profile
                 </Link>
             </Alert>
         </Container>

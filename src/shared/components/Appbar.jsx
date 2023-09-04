@@ -5,7 +5,7 @@ import "../../styles/toner-haven.scss";
 import { useState } from "react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
-import { Badge, Placeholder } from "react-bootstrap";
+import { Badge, Dropdown, Placeholder } from "react-bootstrap";
 import LoginButton from "./LoginButton";
 
 const Appbar = () => {
@@ -52,14 +52,13 @@ const Appbar = () => {
 
           {/* Navbar Right */}
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+            <li hidden={!isAuthenticated} className="nav-item">
               <Link
                 id="num_cart_items"
                 className="nav-link"
                 tabIndex="-1"
                 to={"/cart"}
               >
-                {" "}
                 🛒 Cart{" "}
                 <Badge pill bg="danger">
                   1
@@ -95,13 +94,11 @@ const Appbar = () => {
                   <Link className="dropdown-item" to={"/app/profile"}>
                     My Profile
                   </Link>
-                  <a className="dropdown-item" href="#"></a>
 
                   <Link className="dropdown-item" to={"/app/orders"}>
                     Orders
                   </Link>
-
-                  <div className="dropdown-divider"></div>
+                  <Dropdown.Divider />
                   <a className="dropdown-item" href="#" onClick={handleLogin}>
                     Logout
                   </a>

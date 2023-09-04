@@ -38,7 +38,11 @@ const LoginButton = () => {
 
   return (
     <li className="nav-item">
-      <a className="nav-link" id="num_cart_items" onClick={handleLogin}>
+      <a
+        style={{ cursor: "pointer" }}
+        className="nav-link"
+        onClick={handleLogin}
+      >
         Login / Register
       </a>
     </li>
