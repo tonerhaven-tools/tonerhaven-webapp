@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 const pages = import.meta.glob("./pages/**/*.jsx", { eager: true });
 

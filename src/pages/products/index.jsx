@@ -6,12 +6,9 @@ export default function Products() {
     <Page title={"Toner Haven | All Products!"}>
       <Layout>
         <Container>
-
           <h1>Products Page</h1>
-
         </Container>
       </Layout>
     </Page>
   );
-};
-
+}
