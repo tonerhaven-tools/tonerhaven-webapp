@@ -1,4 +1,4 @@
-import DefaultPage from "./FallbackPage";
+import DefaultPage from "./DefaultPage";
 
 const Forbidden = () => {
   return <DefaultPage statusCode={403} />;

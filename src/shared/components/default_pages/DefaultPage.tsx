@@ -10,13 +10,7 @@ const DefaultPage: React.FC<DefaultPageProps> = ({ statusCode }) => {
   const renderPage = () => {
     if (statusCode == 401)
       return (
-        <div
-          style={{
-            margin: "auto",
-            width: "50%",
-            padding: "10px",
-          }}
-        >
+        <div>
           <img height={500} width={500} src="/images/defaults/noauth.png" />
           <p>Page not authorized</p>
           <Button>Login</Button>

@@ -1,4 +1,4 @@
-import DefaultPage from "./FallbackPage";
+import DefaultPage from "./DefaultPage";
 
 const NotAuthorized = () => {
   return <DefaultPage statusCode={401} />;
