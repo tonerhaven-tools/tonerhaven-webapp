@@ -11,17 +11,39 @@ const DefaultPage: React.FC<DefaultPageProps> = ({ statusCode }) => {
     if (statusCode == 401)
       return (
         <div>
-          <img height={500} width={500} src="/images/defaults/noauth.png" />
-          <p>Page not authorized</p>
-          <Button>Login</Button>
+          Access Denied: Authentication is required to access this resource.
+          Please provide valid credentials or contact our support team for
+          assistance.
         </div>
       );
 
-    if (statusCode == 403) return <div></div>;
+    if (statusCode == 403)
+      return (
+        <div>
+          Access Forbidden: You do not have the necessary permissions to view
+          this content. To request access, please reach out to our administrator
+          or support team.
+        </div>
+      );
 
-    if (statusCode == 404) return <div>Page not found</div>;
+    if (statusCode == 404)
+      return (
+        <div>
+          Page Not Found: The requested resource is currently unavailable. If
+          you believe this is an error, please double-check the URL or contact
+          our support team for further assistance.
+        </div>
+      );
 
-    if (statusCode == 500) return <div></div>;
+    if (statusCode == 500)
+      return (
+        <div>
+          Internal Server Error: We are experiencing technical difficulties on
+          our server, and our team is diligently working to resolve the issue.
+          We apologize for any inconvenience caused and appreciate your patience
+          as we work to restore normal operations.
+        </div>
+      );
 
     return <>Please specify the status code.</>;
   };

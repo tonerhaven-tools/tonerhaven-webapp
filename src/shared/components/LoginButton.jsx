@@ -32,14 +32,14 @@ const LoginButton = () => {
     );
 
   const handleLogin = () => {
-    if (!isAuthenticated) loginWithRedirect();
+    if (!isAuthenticated) loginWithRedirect({ screen_hint: "signup" });
     else logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
   return (
     <li className="nav-item">
       <a className="nav-link" id="num_cart_items" onClick={handleLogin}>
-        Login
+        Login / Register
       </a>
     </li>
   );
