@@ -1,7 +1,7 @@
 import { Layout, Page } from "@/shared/components";
 import { Container } from "react-bootstrap";
 
-export default function Products() {
+const Products = () => {
   return (
     <Page title={"Toner Haven | All Products!"}>
       <Layout>
@@ -11,4 +11,6 @@ export default function Products() {
       </Layout>
     </Page>
   );
-}
+};
+
+export default Products;

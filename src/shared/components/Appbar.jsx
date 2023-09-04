@@ -37,12 +37,12 @@ const Appbar = () => {
         {/* Navbar Left */}
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/products" tabIndex="-1">
+            <a className="nav-link" href="/app/products" tabIndex="-1">
               Products
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/contact-us" tabIndex="-1">
+            <a className="nav-link" href="/app/contact-us" tabIndex="-1">
               Contact Us
             </a>
           </li>
@@ -51,7 +51,7 @@ const Appbar = () => {
         {/* Navbar Right */}
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">
-            <a href="/cart" className="nav-link" id="num_cart_items">
+            <a href="/app/cart" className="nav-link" id="num_cart_items">
               {" "}
               🛒 Cart (<span>0</span>)
             </a>

@@ -1,14 +1,15 @@
 import { Layout, Page } from "@/shared/components";
 import { Container } from "react-bootstrap";
 
-export default function ContactUs() {
+const Cart = () => {
   return (
-    <Page title={"Toner Haven | Contact Us!"}>
+    <Page title={"Toner Haven | Your Cart"}>
       <Layout>
         <Container>
-          <h1>Contact Us page</h1>
+          <h1>Your cart</h1>
         </Container>
       </Layout>
     </Page>
   );
-}
+};
+export default Cart;
