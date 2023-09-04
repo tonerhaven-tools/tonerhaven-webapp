@@ -33,81 +33,84 @@ const Appbar = () => {
             <Logo />
           </Link>
         </Navbar.Brand>
-
-        {/* Navbar Left */}
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link" tabIndex="-1" to={"/products"}>
-              Products
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" tabIndex="-1" to={"/contact-us"}>
-              Contact Us
-            </Link>
-          </li>
-        </ul>
-
-        {/* Navbar Right */}
-        <ul className="navbar-nav ms-auto">
-          <li className="nav-item">
-            <Link
-              id="num_cart_items"
-              className="nav-link"
-              tabIndex="-1"
-              to={"/cart"}
-            >
-              {" "}
-              🛒 Cart (<span>0</span>)
-            </Link>
-          </li>
-          {isAuthenticated ? (
-            <li className="nav-item dropdown">
-              <a
-                onClick={ToggleDropdown}
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                {isAuthenticated ? (
-                  <span>Howdy, {user.nickname ?? ""}!</span>
-                ) : (
-                  <Placeholder as={span}>
-                    <Placeholder xs={6} />
-                  </Placeholder>
-                )}
-              </a>
-              <div
-                className={
-                  userDropdown ? "dropdown-menu show" : "dropdown-menu"
-                }
-                aria-labelledby="navbarDropdown"
-              >
-                <Link className="dropdown-item" to={"/app/profile"}>
-                  My Profile
-                </Link>
-                <a className="dropdown-item" href="#"></a>
-
-                <Link className="dropdown-item" to={"/app/orders"}>
-                  Orders
-                </Link>
-
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#" onClick={handleLogin}>
-                  Logout
-                </a>
-              </div>
-            </li>
-          ) : (
-            <LoginButton />
-          )}
-        </ul>
-
         <Navbar.Toggle />
+
+        <Navbar.Collapse>
+          {/* Navbar Left */}
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" tabIndex="-1" to={"/products"}>
+                Products
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" tabIndex="-1" to={"/contact-us"}>
+                Contact Us
+              </Link>
+            </li>
+          </ul>
+
+          {/* Navbar Right */}
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link
+                id="num_cart_items"
+                className="nav-link"
+                tabIndex="-1"
+                to={"/cart"}
+              >
+                {" "}
+                🛒 Cart (<span>0</span>)
+              </Link>
+            </li>
+            {isAuthenticated ? (
+              <li className="nav-item dropdown">
+                <a
+                  onClick={ToggleDropdown}
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {isAuthenticated ? (
+                    <span>Howdy, {user.nickname ?? ""}!</span>
+                  ) : (
+                    <Placeholder as={span}>
+                      <Placeholder xs={6} />
+                    </Placeholder>
+                  )}
+                </a>
+                <div
+                  className={
+                    userDropdown ? "dropdown-menu show" : "dropdown-menu"
+                  }
+                  aria-labelledby="navbarDropdown"
+                >
+                  <Link className="dropdown-item" to={"/app/profile"}>
+                    My Profile
+                  </Link>
+                  <a className="dropdown-item" href="#"></a>
+
+                  <Link className="dropdown-item" to={"/app/orders"}>
+                    Orders
+                  </Link>
+
+                  <div className="dropdown-divider"></div>
+                  <a className="dropdown-item" href="#" onClick={handleLogin}>
+                    Logout
+                  </a>
+                </div>
+              </li>
+            ) : (
+              <LoginButton />
+            )}
+          </ul>
+
+          {/* <Navbar.Toggle /> */}
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
