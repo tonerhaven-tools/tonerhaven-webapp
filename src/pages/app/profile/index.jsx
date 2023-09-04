@@ -8,7 +8,7 @@ export default function Profile() {
     <Page title={"Toner Haven | My Profile"}>
       <SecuredLayout>
         <ProfileOptionLayout>
-          <div>Test</div>
+          <div>This is my profile</div>
         </ProfileOptionLayout>
       </SecuredLayout>
     </Page>

@@ -1,4 +1,5 @@
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Button, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 interface CompleteProfilePromptProps {
     isVerified: boolean;
@@ -11,6 +12,8 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
     authenticated,
     profileCompleted,
 }) => {
+    if (window.location.pathname == "/app/profile") return;
+
     if (!authenticated) return;
 
     if (authenticated && isVerified && profileCompleted) return;
@@ -21,6 +24,12 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
                 <div>
                     Great to have you here! To make your experience even better, please
                     take a moment to complete your profile information. 🌟
+                </div>
+
+                <div className="d-flex justify-content-end">
+                    <Link to={"/app/profile"}>
+                        <Button variant="outlined-light">Manage Profile</Button>
+                    </Link>
                 </div>
             </Alert>
         </Container>
