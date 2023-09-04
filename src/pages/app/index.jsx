@@ -26,7 +26,7 @@ const Root = () => {
                 <Link
                   style={{ width: "200px", marginBottom: "5px" }}
                   className="call-to-action btn btn-primary"
-                  to={"/app/products"}
+                  to={"/products"}
                 >
                   Products
                 </Link>
@@ -34,7 +34,7 @@ const Root = () => {
                 <Link
                   style={{ width: "200px", marginBottom: "5px" }}
                   className="call-to-action btn"
-                  to={"/app/categories"}
+                  to={"/categories"}
                 >
                   Categories
                 </Link>
