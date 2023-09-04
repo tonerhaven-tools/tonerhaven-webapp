@@ -10,7 +10,11 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
     authenticated,
     profileCompleted,
 }) => {
-    if (window.location.pathname == "/app/profile") return;
+    if (
+        window.location.pathname === "/app/profile" ||
+        window.location.pathname === "/"
+    )
+        return;
 
     if (!authenticated) return;
 
@@ -18,16 +22,12 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
 
     return (
         <Container>
-            <Alert variant="warning" className="p-3">
-                <div>
-                    Great to have you here! To make your experience even better, please
-                    take a moment to complete your profile information. 🌟{" "}
-                    <Link className="btn" to={"/app/profile"}>
-                        Manage my profile
-                    </Link>
-                </div>
-
-                <div className="d-flex justify-content-end"></div>
+            <Alert variant="light" className=" p-3">
+                Great to have you here! To make your experience even better, please take
+                a moment to complete your profile information. 😊{" "}
+                <Link className="btn btn-sm btn-outline-dark m-2" to={"/app/profile"}>
+                    Manage my profile
+                </Link>
             </Alert>
         </Container>
     );

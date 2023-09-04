@@ -5,7 +5,7 @@ import "../../styles/toner-haven.scss";
 import { useState } from "react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
-import { Placeholder } from "react-bootstrap";
+import { Badge, Placeholder } from "react-bootstrap";
 import LoginButton from "./LoginButton";
 
 const Appbar = () => {
@@ -60,7 +60,10 @@ const Appbar = () => {
                 to={"/cart"}
               >
                 {" "}
-                🛒 Cart (<span>0</span>)
+                🛒 Cart{" "}
+                <Badge pill bg="danger">
+                  1
+                </Badge>
               </Link>
             </li>
             {isAuthenticated ? (
