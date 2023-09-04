@@ -1,12 +1,11 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
-import "../../styles/toner-haven.scss";
 import { useState } from "react";
-import Logo from "./Logo";
+import Logo from "@/shared/components/Logo";
 import { Link } from "react-router-dom";
 import { Badge, Dropdown, Placeholder } from "react-bootstrap";
-import LoginButton from "./LoginButton";
+import LoginButton from "@/shared/components/auth/LoginButton";
 
 const Appbar = () => {
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
