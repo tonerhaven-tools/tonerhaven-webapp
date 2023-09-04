@@ -3,10 +3,12 @@ import SecuredLayout from "@/shared/components/auth/SecuredLayout";
 import {
   Alert,
   Button,
+  Col,
   Container,
   FormControl,
   FormGroup,
   FormLabel,
+  Row,
 } from "react-bootstrap";
 import ProfileOptionLayout from "../ProfileOptionLayout";
 import { Form, Link } from "react-router-dom";
@@ -25,7 +27,9 @@ const Profile = () => {
     initialValues: {
       email: isAuthenticated ? user.email : "",
       email_verified: isAuthenticated ? user.email_verified : false,
-      fullName: isAuthenticated ? `${user.given_name} ${user.family_name}` : "",
+      given_name: isAuthenticated ? user.given_name : "",
+      family_name: isAuthenticated ? user.family_name : "",
+      address: isAuthenticated ? user.address : "",
     },
   });
 
@@ -38,17 +42,32 @@ const Profile = () => {
     <Page title={"Toner Haven | My Profile"}>
       <SecuredLayout>
         <ProfileOptionLayout>
-          <Alert>asd</Alert>
           <Form>
-            <FormGroup>
+            <Row>
+              <Col xl={6}>
+                <FormGroup>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl value={formik.values.given_name} />
+                </FormGroup>
+              </Col>
+              <Col xl={6}>
+                <FormGroup>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl value={formik.values.family_name} />
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup as={Col}>
               <FormLabel>Email</FormLabel>
               <FormControl
-                isValid={formik.values.email_verified}
+                isInvalid={!formik.values.email_verified}
                 disabled={true}
                 value={formik.values.email}
               />
               <FormControl.Feedback type="invalid">
-                This email was not verified.
+                {email_sent
+                  ? "The verification email was sent, please check your inbox."
+                  : "This email was not verified."}
                 <Button
                   hidden={email_sent}
                   size="sm"
@@ -58,19 +77,10 @@ const Profile = () => {
                   Send email verification
                 </Button>
               </FormControl.Feedback>
-
-              <FormControl.Feedback type="valid">
-                Email verified
-              </FormControl.Feedback>
             </FormGroup>
-
             <FormGroup>
-              <FormLabel>First Name</FormLabel>
-              <FormControl
-                isValid={formik.values.email_verified}
-                disabled={true}
-                value={formik.values.fullName}
-              />
+              <FormLabel>Address</FormLabel>
+              <FormControl value={formik.values.address} />
             </FormGroup>
           </Form>
         </ProfileOptionLayout>
