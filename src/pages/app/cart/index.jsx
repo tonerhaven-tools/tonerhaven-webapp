@@ -5,9 +5,7 @@ const Cart = () => {
   return (
     <Page title={"Toner Haven | Your Cart"}>
       <Layout>
-        <Container>
-          <h1>Your cart</h1>
-        </Container>
+        <h1>Your cart</h1>
       </Layout>
     </Page>
   );

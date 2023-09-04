@@ -5,9 +5,7 @@ const ContactUs = () => {
   return (
     <Page title={"Toner Haven | Contact Us!"}>
       <Layout>
-        <Container>
-          <h1>Contact Us page</h1>
-        </Container>
+        <h1>Contact us</h1>
       </Layout>
     </Page>
   );

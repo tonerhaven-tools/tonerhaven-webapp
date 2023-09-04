@@ -4,7 +4,7 @@ const Root = () => {
   return (
     <Page title={"Toner Haven | Your one stop shop for toners!"}>
       <Layout>
-        <h1>Wewe</h1>
+        <h1>Your dashboard</h1>
       </Layout>
     </Page>
   );
