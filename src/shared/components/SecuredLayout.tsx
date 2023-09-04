@@ -26,7 +26,6 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
             <CompleteProfilePrompt
                 profileCompleted={false}
                 authenticated={isAuthenticated}
-                isVerified={user?.email_verified ?? false}
             />
             <Container>{isAuthenticated ? children : <NotAuthorized />}</Container>
             <Footer />
