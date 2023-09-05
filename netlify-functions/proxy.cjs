@@ -26,11 +26,11 @@ exports.handler = async (event, context) => {
       options.body = event.body;
     }
 
+    const url = `${apiUrl}?${params.toString()}`;
+    console.log(url);
+
     // Make a request to the external API
-    const response = await fetch.default(
-      `${apiUrl}?${params.toString()}`,
-      options
-    );
+    const response = await fetch.default(url, options);
 
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
