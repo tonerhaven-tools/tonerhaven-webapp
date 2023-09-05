@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = import("node-fetch").then((module) => module.default);
 const dotenv = require("dotenv");
 
 exports.handler = async function (event, context) {
