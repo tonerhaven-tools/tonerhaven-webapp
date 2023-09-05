@@ -9,16 +9,28 @@ exports.handler = async (event, context) => {
     // Dynamically import node-fetch as an ES module
     const fetch = await import("node-fetch");
 
-    // Make a request to the external API
-    const response = await fetch.default(`${apiUrl}?${params.toString()}`, {
-      method: event.httpMethod,
+    // Determine the request method (GET, POST, PUT, etc.)
+    const httpMethod = event.httpMethod.toUpperCase();
+
+    // Initialize options object with common headers
+    const options = {
+      method: httpMethod,
       headers: {
         "Content-Type": "application/json",
         // Add any additional headers if needed
       },
-      // If the request method is POST or PUT, you can pass the request body here
-      body: event.body,
-    });
+    };
+
+    // Include request body for POST and PUT requests
+    if (httpMethod === "POST" || httpMethod === "PUT") {
+      options.body = event.body;
+    }
+
+    // Make a request to the external API
+    const response = await fetch.default(
+      `${apiUrl}?${params.toString()}`,
+      options
+    );
 
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
