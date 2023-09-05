@@ -1,6 +1,3 @@
-const fetch = require("node-fetch");
-const { URLSearchParams } = require("url");
-
 exports.handler = async (event, context) => {
   try {
     // Define the URL of the external API
@@ -9,8 +6,11 @@ exports.handler = async (event, context) => {
     // Extract query parameters from the incoming request
     const params = new URLSearchParams(event.queryStringParameters);
 
+    // Dynamically import node-fetch as an ES module
+    const fetch = await import("node-fetch");
+
     // Make a request to the external API
-    const response = await fetch(`${apiUrl}?${params.toString()}`, {
+    const response = await fetch.default(`${apiUrl}?${params.toString()}`, {
       method: event.httpMethod,
       headers: {
         "Content-Type": "application/json",
