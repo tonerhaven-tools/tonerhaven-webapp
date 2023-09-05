@@ -1,7 +1,7 @@
 exports.handler = async (event, context) => {
   try {
     // Define the URL of the external API
-    const apiUrl = "https://tonerhaven.netlify.app";
+    const apiUrl = "https://tonerhaven-api.netlify.app";
 
     const fetch = await import("node-fetch");
 
