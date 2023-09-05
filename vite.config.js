@@ -19,10 +19,10 @@ export default ({ mode }) => {
     },
     server: {
       proxy: {
-        "/api/*": {
+        "/api": {
           target: process.env.EXPRESS_API_URL,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, "api"),
+          rewrite: (path) => path.replace(/^\/api/, "/api"),
         },
       },
     },
