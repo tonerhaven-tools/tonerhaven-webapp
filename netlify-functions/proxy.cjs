@@ -1,5 +1,5 @@
-const fetch = import("node-fetch").then((module) => module.default);
 const dotenv = require("dotenv");
+const { default: fetch } = require("node-fetch");
 
 exports.handler = async function (event, context) {
   const apiUrl = `https://tonerhaven-api.netlify.app`; // Replace with your API URL
