@@ -2,4 +2,4 @@
   functions = "netlify-functions"
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/proxy"
+  to = "/.netlify/functions/proxy:splat"
