@@ -1,7 +1,7 @@
 exports.handler = async (event, context) => {
   try {
     // Define the URL of the external API
-    const apiUrl = "https://tonerhaven-api.netlify.app/api";
+    const apiUrl = "https://tonerhaven-api.netlify.app";
 
     // Extract query parameters from the incoming request
     const params = new URLSearchParams(event.queryStringParameters);
