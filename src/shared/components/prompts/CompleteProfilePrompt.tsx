@@ -1,24 +1,37 @@
+import useOnboarding from "@/shared/hooks/store/useOnboarding";
+import { useAuth0 } from "@auth0/auth0-react";
+import Axios from "axios";
+import { useEffect, useState } from "react";
 import { Alert, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-interface CompleteProfilePromptProps {
-    authenticated: boolean;
-    profileCompleted: boolean;
-}
+interface CompleteProfilePromptProps { }
 
-const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
-    authenticated,
-    profileCompleted,
-}) => {
+const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({ }) => {
+    const { isLoading, isAuthenticated, user } = useAuth0();
+    const [profileCompleted, setCompleted] = useState(false);
+
     if (
         window.location.pathname.indexOf("/app/profile") !== -1 ||
         window.location.pathname === "/"
     )
         return;
 
-    if (!authenticated) return;
+    if (!isLoading && !isAuthenticated) return;
 
-    if (authenticated && profileCompleted) return;
+    const currentSub = user != undefined ? user.sub : "";
+
+    useEffect(() => {
+        Axios.get(`/api/profiles/ping/${currentSub}`).then((resp) => {
+            if (resp.status == 200) {
+                setCompleted(resp.data.exists);
+            }
+        });
+    }, [currentSub]);
+
+    if (profileCompleted) {
+        return;
+    }
 
     return (
         <Container className="mt-3">

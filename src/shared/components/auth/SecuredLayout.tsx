@@ -22,10 +22,6 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
         return (
             <>
                 <Appbar />
-                <CompleteProfilePrompt
-                    profileCompleted={false}
-                    authenticated={isAuthenticated}
-                />
                 <Container>
                     <div>Authenticating, please wait...</div>
                 </Container>
@@ -36,11 +32,10 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
     return (
         <>
             <Appbar />
-            <CompleteProfilePrompt
-                profileCompleted={false}
-                authenticated={isAuthenticated}
-            />
-            <Container className="mt-3">{isAuthenticated ? children : <NotAuthorized />}</Container>
+            <CompleteProfilePrompt authenticated={isAuthenticated} />
+            <Container className="mt-3">
+                {isAuthenticated ? children : <NotAuthorized />}
+            </Container>
             <Footer />
         </>
     );

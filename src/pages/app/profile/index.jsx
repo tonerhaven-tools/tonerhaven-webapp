@@ -10,38 +10,72 @@ import {
   FormLabel,
   Row,
 } from "react-bootstrap";
-import ProfileOptionLayout from "../ProfileOptionLayout";
 import { Form, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ResendVerification } from "@/shared/hooks/auth0/methods";
-import { useState } from "react";
-
-const schema = yup.object().shape({
-  given_name: yup.string().required(),
-  family_name: yup.string().required(),
-  username: yup.string().required(),
-  address: yup.string().required(),
-  contact_number: yup.string().required(),
-  email: yup.string().required(),
-});
+import { useEffect, useState } from "react";
+import useOnboarding from "@/shared/hooks/store/useOnboarding";
+import Axios from "axios";
+import { status } from "nprogress";
 
 const Profile = () => {
   const [email_sent, setSendEmailState] = useState(false);
+  const [new_acct, setNewAcct] = useState(true);
 
-  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  const { isLoading, isAuthenticated, user } = useAuth0();
+
+  const [data, setData] = useState({
+    first_name: new_acct && user !== undefined ? user.given_name : "",
+    last_name: new_acct && user !== undefined ? user.family_name : "",
+    address: new_acct && user !== undefined ? "" : "",
+    email: new_acct && user !== undefined ? user.email : "",
+    company: new_acct && user !== undefined ? "" : "",
+    company_phone: new_acct && user !== undefined ? "" : "",
+    personal_phone: new_acct && user !== undefined ? "" : "",
+    auth_id: new_acct && user !== undefined ? user.sub : "",
+  });
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      Axios.get(`/api/profiles/${user.sub}`).then((resp) => {
+        if (resp.data !== "") {
+          setData(resp.data);
+          setNewAcct(false);
+        }
+      });
+    }
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
-    validationSchema: schema,
+    validationSchema: yup.object().shape({
+      first_name: yup.string().required(),
+      last_name: yup.string().required(),
+      address: yup.string().required(),
+      email: yup.string().required(),
+      company: yup.string().required(),
+      company_phone: yup.string().required(),
+      personal_phone: yup.string().required(),
+      auth_id: yup.string().required(),
+    }),
     initialValues: {
-      email: isAuthenticated ? user.email : "",
-      email_verified: isAuthenticated ? user.email_verified : false,
-      given_name: isAuthenticated ? user.given_name : "",
-      family_name: isAuthenticated ? user.family_name : "",
-      address: isAuthenticated ? user.address : "",
-      contact_number: isAuthenticated ? user.phone_number : "",
+      first_name: data.first_name,
+      last_name: data.last_name,
+      address: data.address,
+      email: data.email,
+      company: data.company,
+      company_phone: data.company_phone,
+      personal_phone: data.personal_phone,
+      auth_id: data.auth_id,
+    },
+    onSubmit: (value) => {
+      Axios.post("/api/profiles/create", value).then((resp) => {
+        if (resp.status == 201) {
+          alert("added");
+        }
+      });
     },
   });
 
@@ -53,77 +87,113 @@ const Profile = () => {
   return (
     <Page title={"Toner Haven | My Profile"}>
       <SecuredLayout>
-        <ProfileOptionLayout>
-          <Form onSubmit={formik.handleSubmit}>
-            <Row>
-              <Col xl={6}>
-                <FormGroup>
-                  <FormLabel>First Name</FormLabel>
-                  <FormControl
-                    id="given_name"
-                    onChange={formik.handleChange}
-                    value={formik.values.given_name}
-                    isInvalid={!!formik.errors.given_name}
-                  />
-                  <FormControl.Feedback type="invalid">
-                    {formik.errors.given_name}
-                  </FormControl.Feedback>
-                </FormGroup>
-              </Col>
-              <Col xl={6}>
-                <FormGroup>
-                  <FormLabel>Last Name</FormLabel>
-                  <FormControl
-                    id="family_name"
-                    onChange={formik.handleChange}
-                    value={formik.values.family_name}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <FormGroup as={Col}>
-              <FormLabel>Email</FormLabel>
-              <FormControl
-                id="email"
-                isInvalid={!formik.values.email_verified}
-                disabled={true}
-                value={formik.values.email}
-              />
-              <FormControl.Feedback type="invalid">
-                {email_sent
-                  ? "The verification email was sent, please check your inbox."
-                  : "This email was not verified."}
-                <Button
-                  hidden={email_sent}
-                  size="sm"
-                  variant="link"
-                  onClick={handleResendEmail}
-                >
-                  Send email verification
-                </Button>
-              </FormControl.Feedback>
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Address</FormLabel>
-              <FormControl
-                id="address"
-                onChange={formik.handleChange}
-                value={formik.values.address}
-              />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Contact Number</FormLabel>
-              <FormControl
-                id="contact_number"
-                onChange={formik.handleChange}
-                value={formik.values.contact_number}
-              />
-            </FormGroup>
-            <Button type="submit" className="mt-3">
-              Save
-            </Button>
-          </Form>
-        </ProfileOptionLayout>
+        <h1>Manage Profile</h1>
+        <hr />
+        <Form noValidate onSubmit={formik.handleSubmit}>
+          <Row>
+            <Col xl={6}>
+              <FormGroup>
+                <FormLabel>First Name</FormLabel>
+                <FormControl
+                  id="first_name"
+                  onChange={formik.handleChange}
+                  value={formik.values.first_name}
+                  isInvalid={!!formik.errors.first_name}
+                />
+                <FormControl.Feedback type="invalid">
+                  {formik.errors.first_name}
+                </FormControl.Feedback>
+              </FormGroup>
+            </Col>
+            <Col xl={6}>
+              <FormGroup>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl
+                  id="last_name"
+                  onChange={formik.handleChange}
+                  value={formik.values.last_name}
+                  isInvalid={!!formik.errors.last_name}
+                />
+                <FormControl.Feedback type="invalid">
+                  {formik.errors.last_name}
+                </FormControl.Feedback>
+              </FormGroup>
+            </Col>
+          </Row>
+          <FormGroup as={Col}>
+            <FormLabel>Email</FormLabel>
+            <FormControl
+              id="email"
+              disabled={true}
+              value={formik.values.email}
+            />
+            <FormControl.Feedback type="invalid">
+              {email_sent
+                ? "The verification email was sent, please check your inbox."
+                : "This email was not verified."}
+              <Button
+                hidden={email_sent}
+                size="sm"
+                variant="link"
+                onClick={handleResendEmail}
+              >
+                Send email verification
+              </Button>
+            </FormControl.Feedback>
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Address</FormLabel>
+            <FormControl
+              id="address"
+              onChange={formik.handleChange}
+              value={formik.values.address}
+              isInvalid={!!formik.errors.address}
+            />
+            <FormControl.Feedback type="invalid">
+              {formik.errors.address}
+            </FormControl.Feedback>
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Company</FormLabel>
+            <FormControl
+              id="company"
+              onChange={formik.handleChange}
+              value={formik.values.company}
+              isInvalid={!!formik.errors.company}
+            />
+            <FormControl.Feedback type="invalid">
+              {formik.errors.company}
+            </FormControl.Feedback>
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Company Phone</FormLabel>
+            <FormControl
+              id="company_phone"
+              onChange={formik.handleChange}
+              value={formik.values.company_phone}
+              isInvalid={!!formik.errors.company_phone}
+            />
+            <FormControl.Feedback type="invalid">
+              {formik.errors.company_phone}
+            </FormControl.Feedback>
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Personal Phone</FormLabel>
+            <FormControl
+              id="personal_phone"
+              onChange={formik.handleChange}
+              value={formik.values.personal_phone}
+              isInvalid={!!formik.errors.personal_phone}
+            />
+            <FormControl.Feedback type="invalid">
+              {formik.errors.personal_phone}
+            </FormControl.Feedback>
+          </FormGroup>
+
+          <Button type="submit" className="mt-3">
+            Save
+          </Button>
+        </Form>
       </SecuredLayout>
     </Page>
   );

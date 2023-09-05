@@ -18,7 +18,6 @@ const Layout = ({ children }) => {
       <Appbar />
 
       <CompleteProfilePrompt
-        profileCompleted={false}
         authenticated={isAuthenticated}
         isVerified={user?.email_verified ?? false}
       />
