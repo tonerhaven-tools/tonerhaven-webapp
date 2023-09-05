@@ -25,10 +25,6 @@ const routes: ProfileOptionRoutes[] = [
         text: "Basic Details",
     },
 
-    {
-        path: "/app/profile/bank-details",
-        text: "Payment method",
-    },
 ];
 
 const ProfileOptionLayout: React.FC<ProfileOptionLayoutProps> = ({

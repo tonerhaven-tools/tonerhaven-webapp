@@ -13,9 +13,19 @@ import {
 import ProfileOptionLayout from "../ProfileOptionLayout";
 import { Form, Link } from "react-router-dom";
 import { useFormik } from "formik";
-import { User, useAuth0 } from "@auth0/auth0-react";
+import * as yup from "yup";
+import { useAuth0 } from "@auth0/auth0-react";
 import { ResendVerification } from "@/shared/hooks/auth0/methods";
 import { useState } from "react";
+
+const schema = yup.object().shape({
+  given_name: yup.string().required(),
+  family_name: yup.string().required(),
+  username: yup.string().required(),
+  address: yup.string().required(),
+  contact_number: yup.string().required(),
+  email: yup.string().required(),
+});
 
 const Profile = () => {
   const [email_sent, setSendEmailState] = useState(false);
@@ -24,12 +34,14 @@ const Profile = () => {
 
   const formik = useFormik({
     enableReinitialize: true,
+    validationSchema: schema,
     initialValues: {
       email: isAuthenticated ? user.email : "",
       email_verified: isAuthenticated ? user.email_verified : false,
       given_name: isAuthenticated ? user.given_name : "",
       family_name: isAuthenticated ? user.family_name : "",
       address: isAuthenticated ? user.address : "",
+      contact_number: isAuthenticated ? user.phone_number : "",
     },
   });
 
@@ -42,24 +54,37 @@ const Profile = () => {
     <Page title={"Toner Haven | My Profile"}>
       <SecuredLayout>
         <ProfileOptionLayout>
-          <Form>
+          <Form onSubmit={formik.handleSubmit}>
             <Row>
               <Col xl={6}>
                 <FormGroup>
                   <FormLabel>First Name</FormLabel>
-                  <FormControl value={formik.values.given_name} />
+                  <FormControl
+                    id="given_name"
+                    onChange={formik.handleChange}
+                    value={formik.values.given_name}
+                    isInvalid={!!formik.errors.given_name}
+                  />
+                  <FormControl.Feedback type="invalid">
+                    {formik.errors.given_name}
+                  </FormControl.Feedback>
                 </FormGroup>
               </Col>
               <Col xl={6}>
                 <FormGroup>
                   <FormLabel>Last Name</FormLabel>
-                  <FormControl value={formik.values.family_name} />
+                  <FormControl
+                    id="family_name"
+                    onChange={formik.handleChange}
+                    value={formik.values.family_name}
+                  />
                 </FormGroup>
               </Col>
             </Row>
             <FormGroup as={Col}>
               <FormLabel>Email</FormLabel>
               <FormControl
+                id="email"
                 isInvalid={!formik.values.email_verified}
                 disabled={true}
                 value={formik.values.email}
@@ -80,8 +105,23 @@ const Profile = () => {
             </FormGroup>
             <FormGroup>
               <FormLabel>Address</FormLabel>
-              <FormControl value={formik.values.address} />
+              <FormControl
+                id="address"
+                onChange={formik.handleChange}
+                value={formik.values.address}
+              />
             </FormGroup>
+            <FormGroup>
+              <FormLabel>Contact Number</FormLabel>
+              <FormControl
+                id="contact_number"
+                onChange={formik.handleChange}
+                value={formik.values.contact_number}
+              />
+            </FormGroup>
+            <Button type="submit" className="mt-3">
+              Save
+            </Button>
           </Form>
         </ProfileOptionLayout>
       </SecuredLayout>
