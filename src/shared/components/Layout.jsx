@@ -7,12 +7,14 @@ import ThreeDots from "./loaders/ThreeDots";
 import { useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import CompleteProfilePrompt from "./prompts/CompleteProfilePrompt";
+import LiveChat from "./LiveChat";
 
 const Layout = ({ children }) => {
   const { isAuthenticated, isLoading, user } = useAuth0();
 
   return (
     <>
+      <LiveChat/>
       <Appbar />
       <CompleteProfilePrompt
         profileCompleted={false}
