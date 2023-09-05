@@ -1,23 +1,42 @@
-exports.handler = async function (event, context) {
-  const apiUrl = `https://tonerhaven-api.netlify.app`; // Replace with your API URL
+const fetch = require("node-fetch");
+const { URLSearchParams } = require("url");
 
-  console.log(`connected to ${apiUrl}`);
+exports.handler = async (event, context) => {
+  try {
+    // Define the URL of the external API
+    const apiUrl = "https://tonerhaven-api.netlify.app/api";
 
-  const response = fetch(apiUrl + event.path, {
-    method: event.httpMethod,
-    headers: event.headers,
-    body: event.body,
-  });
+    // Extract query parameters from the incoming request
+    const params = new URLSearchParams(event.queryStringParameters);
 
-  const data = response.json();
+    // Make a request to the external API
+    const response = await fetch(`${apiUrl}?${params.toString()}`, {
+      method: event.httpMethod,
+      headers: {
+        "Content-Type": "application/json",
+        // Add any additional headers if needed
+      },
+      // If the request method is POST or PUT, you can pass the request body here
+      body: event.body,
+    });
 
-  console.log(JSON.stringify(data));
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
 
-  return {
-    statusCode: response.status,
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+    // Parse the response JSON
+    const data = await response.json();
+
+    // Return the data as a JSON response
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data),
+    };
+  } catch (error) {
+    // Handle any errors and return an error response
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 };
