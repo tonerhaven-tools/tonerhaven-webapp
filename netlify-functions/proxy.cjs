@@ -2,7 +2,7 @@ const fetch = import("node-fetch").then((module) => module.default);
 const dotenv = require("dotenv");
 
 exports.handler = async function (event, context) {
-  const apiUrl = process.env.EXPRESS_API_URL; // Replace with your API URL
+  const apiUrl = `https://tonerhaven-api.netlify.app`; // Replace with your API URL
 
   console.log(`connected to ${apiUrl}`);
 
