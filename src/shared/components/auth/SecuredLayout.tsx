@@ -40,7 +40,7 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
                 profileCompleted={false}
                 authenticated={isAuthenticated}
             />
-            <Container>{isAuthenticated ? children : <NotAuthorized />}</Container>
+            <Container className="mt-3">{isAuthenticated ? children : <NotAuthorized />}</Container>
             <Footer />
         </>
     );

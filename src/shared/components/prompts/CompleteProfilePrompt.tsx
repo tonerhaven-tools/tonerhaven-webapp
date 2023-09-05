@@ -21,7 +21,7 @@ const CompleteProfilePrompt: React.FC<CompleteProfilePromptProps> = ({
     if (authenticated && profileCompleted) return;
 
     return (
-        <Container>
+        <Container className="mt-3">
             <Alert variant="warning" className=" p-3">
                 Great to have you here! To make your experience even better, please take
                 a moment to complete your profile information. 😊{" "}

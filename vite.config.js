@@ -4,7 +4,7 @@ import path from "path";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default ({ mode }) => {
-  process.env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
+  process.env = Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
 
   return defineConfig({
     plugins: [react(), basicSsl()],
@@ -19,12 +19,12 @@ export default ({ mode }) => {
     },
     server: {
       proxy: {
-        '/api': {
+        "/api": {
           target: process.env.EXPRESS_API_URL,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, 'api')
-        }
-      }
-    }
+          rewrite: (path) => path.replace(/^\/api/, "api"),
+        },
+      },
+    },
   });
-}
+};
