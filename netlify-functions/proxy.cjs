@@ -4,7 +4,6 @@ exports.handler = async (event, context) => {
     const apiUrl = "https://tonerhaven-api.netlify.app";
 
     // Extract query parameters from the incoming request
-    const params = new URLSearchParams(event.queryStringParameters);
 
     // Dynamically import node-fetch as an ES module
     const fetch = await import("node-fetch");
@@ -26,7 +25,7 @@ exports.handler = async (event, context) => {
       options.body = event.body;
     }
 
-    const url = `${apiUrl}?${params.toString()}`;
+    const url = `${apiUrl}${event.path}`;
     console.log(url);
 
     // Make a request to the external API
