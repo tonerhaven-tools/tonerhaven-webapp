@@ -7,6 +7,7 @@ const Root = () => {
   return (
     <Page title={"Toner Haven | Your one stop shop for toners!"}>
       <Layout>
+        {import.meta.env.MODE}
         <div className="row">
           <div className="col-md-5">
             <div className="middle-center mt-5">
