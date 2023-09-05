@@ -15,4 +15,13 @@ export default defineConfig({
       utils: path.join(__dirname, "./src/shared/utils/"),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, 'api')
+      }
+    }
+  }
 });
