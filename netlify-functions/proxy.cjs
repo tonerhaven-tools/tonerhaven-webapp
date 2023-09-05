@@ -1,36 +1,52 @@
-const dotenv = require("dotenv");
-const { default: fetch } = require("node-fetch");
+const https = require("https");
 
 exports.handler = async function (event, context) {
-  const apiUrl = `https://tonerhaven-api.netlify.app`; // Replace with your API URL
+  const apiUrl = `https://tonerhaven-api.netlify.app${event.path}`; // Replace with your API URL
 
   console.log(`connected to ${apiUrl}`);
 
-  const response = await fetch(apiUrl + event.path, {
-    method: event.httpMethod,
-    headers: event.headers,
-    body: event.body,
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      apiUrl,
+      {
+        method: event.httpMethod,
+        headers: event.headers,
+      },
+      (res) => {
+        let responseBody = "";
+
+        res.on("data", (chunk) => {
+          responseBody += chunk;
+        });
+
+        res.on("end", () => {
+          const statusCode = res.statusCode;
+          const headers = {
+            "Content-Type": "application/json",
+          };
+          const response = {
+            statusCode,
+            headers,
+            body: responseBody,
+          };
+
+          console.log(JSON.stringify(response));
+
+          resolve(response);
+        });
+      }
+    );
+
+    req.on("error", (error) => {
+      console.error(`Error: ${error.message}`);
+      reject(error);
+    });
+
+    // Write the request body if it exists
+    if (event.body) {
+      req.write(event.body);
+    }
+
+    req.end();
   });
-
-  const data = await response.json();
-
-  console.log(JSON.stringify(data));
-
-  return {
-    statusCode: response.status,
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  // try {
-
-  // } catch (error) {
-  //   console.log(JSON.stringify(error));
-  //   return {
-  //     statusCode: 500,
-  //     body: JSON.stringify(error),
-  //   };
-  // }
 };
