@@ -25,6 +25,8 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
 
     let observable = from(checks);
 
+    if (!isAuthenticated) return;
+
     if (isAuthenticated) {
         observable = from(checks).pipe(
             distinct((check) => check.id),
