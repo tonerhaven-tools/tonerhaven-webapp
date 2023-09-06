@@ -25,8 +25,6 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
 
     let observable = from(checks);
 
-    if (!isAuthenticated) return;
-
     if (isAuthenticated) {
         observable = from(checks).pipe(
             distinct((check) => check.id),
@@ -87,6 +85,8 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
             setChecks(newData);
         });
     }, []);
+
+    if (!isAuthenticated) return;
 
     return <Toaster position="top-center" reverseOrder={false} />;
 };
