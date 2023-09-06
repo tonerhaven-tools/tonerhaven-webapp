@@ -97,7 +97,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
 
     if (!isAuthenticated) return;
 
-    return <Toaster position="top-center" reverseOrder={false} />;
+    return <Toaster position="bottom-left" reverseOrder={false} />;
 };
 
 export default AccountChecks;
