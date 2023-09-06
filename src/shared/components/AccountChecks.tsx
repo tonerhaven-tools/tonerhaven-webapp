@@ -28,14 +28,13 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
     if (isAuthenticated) {
         observable = from(checks).pipe(
             distinct((check) => check.id),
-            distinctUntilChanged(),
             mergeMap((check) => {
                 return from(
                     Axios.get(check.route, {
                         headers: {
                             auth_id: user?.sub,
                         },
-                    }).then((resp) => Promise.resolve(check))
+                    }).then(() => Promise.resolve(check))
                 );
             })
         );
@@ -63,7 +62,17 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
     useEffect(() => {
         const subscription = observable.subscribe({
             next: (response) => {
-                toast(response?.messageTemplate, { icon: renderStatus(response) });
+                toast(
+                    (t) => (
+                        <span>
+                            <strong>{response.title}</strong>
+                            <p>{response.messageTemplate}</p>
+                        </span>
+                    ),
+                    {
+                        icon: renderStatus(response),
+                    }
+                );
             },
             complete: () => {
                 console.log("Observable completed");
