@@ -4,28 +4,24 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import Logo from "@/shared/components/Logo";
 import { Link } from "react-router-dom";
-import { Badge, Dropdown, Placeholder } from "react-bootstrap";
+import { Badge, Nav, NavItem } from "react-bootstrap";
 import LoginButton from "@/shared/components/auth/LoginButton";
 
 const Appbar = () => {
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  const [userDropdown, setUserDropdown] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const handleLogin = () => {
     if (!isAuthenticated) loginWithRedirect();
     else logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
-  const ToggleDropdown = () => {
-    if (userDropdown) {
-      setUserDropdown(false);
-    } else {
-      setUserDropdown(true);
-    }
-  };
-
   return (
-    <Navbar expand="sm" id={'navbar'} className="bg-body-tertiary justify-content-between">
+    <Navbar
+      expand="sm"
+      id={"navbar"}
+      className="bg-body-tertiary justify-content-between"
+    >
       <Container>
         <Navbar.Brand>
           <Link to={"/"} className={"navbar-brand"}>
@@ -59,56 +55,17 @@ const Appbar = () => {
                 to={"/cart"}
               >
                 🛒 Cart{" "}
-                <Badge pill bg="danger">
-                  1
-                </Badge>
+                {cartCount > 0 ? (
+                  <Badge pill bg="danger">
+                    {cartCount}
+                  </Badge>
+                ) : (
+                  <></>
+                )}
               </Link>
             </li>
-            {isAuthenticated ? (
-              <li className="nav-item dropdown">
-                <a
-                  onClick={ToggleDropdown}
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {isAuthenticated ? (
-                    <span>Howdy, {user.nickname ?? ""}!</span>
-                  ) : (
-                    <Placeholder as={span}>
-                      <Placeholder xs={6} />
-                    </Placeholder>
-                  )}
-                </a>
-                <div
-                  className={
-                    userDropdown ? "dropdown-menu show" : "dropdown-menu"
-                  }
-                  aria-labelledby="navbarDropdown"
-                >
-                  <Link className="dropdown-item" to={"/app/profile"}>
-                    My Profile
-                  </Link>
-
-                  <Link className="dropdown-item" to={"/app/orders"}>
-                    Orders
-                  </Link>
-                  <Dropdown.Divider />
-                  <a className="dropdown-item" href="#" onClick={handleLogin}>
-                    Logout
-                  </a>
-                </div>
-              </li>
-            ) : (
-              <LoginButton />
-            )}
+            <LoginButton />
           </ul>
-
-          {/* <Navbar.Toggle /> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

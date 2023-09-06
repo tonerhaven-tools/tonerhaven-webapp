@@ -4,7 +4,6 @@ import Footer from "@/shared/components/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NotAuthorized } from "@/shared/components/default_pages";
 import { Container } from "react-bootstrap";
-import CompleteProfilePrompt from "@/shared/components/prompts/CompleteProfilePrompt";
 
 /// Contains layout that are required to be secured
 interface SecuredLayoutProps {
@@ -32,7 +31,6 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
     return (
         <>
             <Appbar />
-            <CompleteProfilePrompt authenticated={isAuthenticated} />
             <Container className="mt-3">
                 {isAuthenticated ? children : <NotAuthorized />}
             </Container>

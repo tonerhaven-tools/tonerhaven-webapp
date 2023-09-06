@@ -6,7 +6,9 @@ export default function Orders() {
   return (
     <Page title={"Toner Haven | Orders"}>
       <SecuredLayout>
-        <h1>My Orders</h1>
+        <h2>
+          <strong>My Orders</strong>
+        </h2>
       </SecuredLayout>
     </Page>
   );
