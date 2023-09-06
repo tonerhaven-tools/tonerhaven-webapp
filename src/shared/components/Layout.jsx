@@ -12,7 +12,6 @@ const Layout = ({ children }) => {
     <>
       <LiveChat />
       <Appbar />
-
       <Container className="mt-3">
         <div className="content-spacer">{children}</div>
       </Container>

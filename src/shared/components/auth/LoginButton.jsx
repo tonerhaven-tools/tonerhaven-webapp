@@ -32,10 +32,7 @@ const LoginButton = () => {
   const { isLoading, loginWithRedirect, logout, isAuthenticated, user } =
     useAuth0();
 
-  const currentSub = user != undefined ? user.sub : "";
-
   const [userDropdown, setUserDropdown] = useState(false);
-  const [profileCompleted, setCompleted] = useState(false);
 
   const ToggleDropdown = () => {
     if (userDropdown) {
@@ -44,14 +41,6 @@ const LoginButton = () => {
       setUserDropdown(true);
     }
   };
-
-  useEffect(() => {
-    Axios.get(`/api/profiles/ping/${currentSub}`).then((resp) => {
-      if (resp.status == 200) {
-        setCompleted(true);
-      }
-    });
-  }, []);
 
   const handleLogin = () => {
     if (!isAuthenticated) loginWithRedirect({ screen_hint: "signup" });

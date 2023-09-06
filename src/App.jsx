@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NProgress from "nprogress";
+import AccountChecks from "./shared/components/AccountChecks";
 
 const pages = import.meta.glob("./pages/**/*.jsx", { eager: true });
 
@@ -34,7 +35,11 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <AccountChecks>
+      <RouterProvider router={router} />
+    </AccountChecks>
+  );
 };
 
 export default App;
