@@ -13,14 +13,12 @@ interface AccountCheckModel {
     type: "info" | "warning" | "error" | "success";
 }
 
-interface AccountChecksProps {
-    children: ReactNode;
-}
+interface AccountChecksProps { }
 
 const parse = (template: string, values: any) =>
     template.replace(/{{(.*?)}}/g, (_, match) => values[match.trim()] || "");
 
-const AccountChecks: React.FC<AccountChecksProps> = ({ children }) => {
+const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
     const { user, isAuthenticated } = useAuth0();
 
     const [checks, setChecks] = useState<AccountCheckModel[]>([]);
@@ -69,12 +67,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ children }) => {
         });
     }, []);
 
-    return (
-        <>
-            <Toaster position="top-center" reverseOrder={false} />
-            {children}
-        </>
-    );
+    return <Toaster position="top-center" reverseOrder={false} />;
 };
 
 export default AccountChecks;
