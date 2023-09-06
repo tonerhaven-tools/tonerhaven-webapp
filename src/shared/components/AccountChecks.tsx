@@ -43,10 +43,29 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
         );
     }
 
+    const renderStatus = (value: AccountCheckModel) => {
+        switch (value.type) {
+            case "info":
+                return "💬";
+
+            case "success":
+                return "✔️";
+
+            case "warning":
+                return "⚠️";
+
+            case "error":
+                return "❌";
+
+            default:
+                return "👋";
+        }
+    };
+
     useEffect(() => {
         const subscription = observable.subscribe({
             next: (response) => {
-                toast(response?.messageTemplate, { icon: "👋" });
+                toast(response?.messageTemplate, { icon: renderStatus(response) });
             },
             complete: () => {
                 console.log("Observable completed");
