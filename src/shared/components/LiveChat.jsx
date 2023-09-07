@@ -17,7 +17,7 @@ export default function LiveChat() {
           element.remove()
         }
       } catch (e) {
-        console.log("Couldn't remove branding.");
+        //console.log("Couldn't remove branding.");
       }
     }
 
