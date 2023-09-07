@@ -11,13 +11,11 @@ const Footer = React.lazy(() => import("../Footer"));
 
 /// Contains layout that are required to be secured
 interface SecuredLayoutProps {
-    hasProfile: boolean;
     children: ReactNode;
 }
 
 const SecuredLayout: React.FC<SecuredLayoutProps> = ({
     children,
-    hasProfile,
 }) => {
     const { isAuthenticated, isLoading, user } = useAuth0();
 
@@ -25,7 +23,7 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
         return (
             <>
                 <Appbar />
-                <Container>
+                <Container className={"mt-3"}>
                     <div>Authenticating, please wait...</div>
                 </Container>
                 <Footer />
