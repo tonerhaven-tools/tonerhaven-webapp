@@ -18,6 +18,11 @@ const Products = () => {
     });
   };
 
+  const onImageError = (e, item) => {
+    const img = document.getElementById(`product-img-${item.name}`);
+    img.src = "/images/favicon.png";
+  };
+
   return (
     <Page title={"Toner Haven | All Products!"}>
       <Layout>
@@ -28,8 +33,10 @@ const Products = () => {
             <div className="col-md-3" key={key}>
               <div className="product">
                 <img
+                  id={`product-img-${product.name}`}
                   className={"img-responsive"}
                   src={`/api/storage/uploads/products/${product.thumbnail}`}
+                  onError={(e) => onImageError(e, product)}
                 />
                 <div className={"name"}>{product.name}</div>
                 <div className={"price"}>${product.our_price}</div>

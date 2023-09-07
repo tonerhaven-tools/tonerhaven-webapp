@@ -1,10 +1,13 @@
-import { ReactNode } from "react";
-import Appbar from "@/shared/components/Appbar";
-import Footer from "@/shared/components/Footer";
+import React, { ReactNode, Suspense } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NotAuthorized } from "@/shared/components/default_pages";
 import { Container } from "react-bootstrap";
-import AccountChecks from "../AccountChecks";
+
+const AccountChecks = React.lazy(() => import("../AccountChecks"));
+const LiveChat = React.lazy(() => import("../LiveChat"));
+const Appbar = React.lazy(() => import("../Appbar"));
+const Footer = React.lazy(() => import("../Footer"));
+
 
 /// Contains layout that are required to be secured
 interface SecuredLayoutProps {
@@ -30,14 +33,14 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
         );
 
     return (
-        <>
+        <Suspense fallback={<div>Loading..</div>}>
             <Appbar />
             <AccountChecks />
             <Container className="mt-3">
                 {isAuthenticated ? children : <NotAuthorized />}
             </Container>
             <Footer />
-        </>
+        </Suspense>
     );
 };
 

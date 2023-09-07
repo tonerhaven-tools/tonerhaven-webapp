@@ -1,16 +1,15 @@
 import Props from "prop-types";
-import Appbar from "./Appbar";
-import Footer from "./Footer";
 import { Container } from "react-bootstrap";
-import { useAuth0 } from "@auth0/auth0-react";
-import LiveChat from "./LiveChat";
-import AccountChecks from "./AccountChecks";
+import React, { Suspense } from "react";
+
+const AccountChecks = React.lazy(() => import("../components/AccountChecks"));
+const LiveChat = React.lazy(() => import("../components/LiveChat"));
+const Appbar = React.lazy(() => import("../components/Appbar"));
+const Footer = React.lazy(() => import("../components/Footer"));
 
 const Layout = ({ children }) => {
-  const { isAuthenticated, isLoading, user } = useAuth0();
-
   return (
-    <>
+    <Suspense fallback={<div>Loading..</div>}>
       <LiveChat />
       <Appbar />
       <AccountChecks />
@@ -18,7 +17,7 @@ const Layout = ({ children }) => {
         <div className="content-spacer">{children}</div>
       </Container>
       <Footer />
-    </>
+    </Suspense>
   );
 };
 

@@ -25,7 +25,21 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
 
     let observable = from(checks);
 
-    if (isAuthenticated) {
+    useEffect(() => {
+        Axios.get("/api/check/me").then((resp) => {
+            if (resp.status == 200) {
+                let newData: AccountCheckModel[] = resp.data;
+                setChecks(newData);
+                console.log(newData);
+            }
+        });
+        return () => {
+
+            console.log("Loaded base api, will not load again")
+        };
+    }, []);
+
+    if (isAuthenticated && checks.length > 0) {
         observable = from(checks).pipe(
             distinct((check) => check.id),
             mergeMap((check) => {
@@ -39,6 +53,37 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
             })
         );
     }
+
+    useEffect(() => {
+        const subscription = observable.subscribe({
+            next: (response) => {
+                toast(
+                    (t) => (
+                        <span>
+                            <strong>{response.title}</strong>
+                            <div>
+                                <small>{response.messageTemplate}</small>
+                            </div>
+                        </span>
+                    ),
+                    {
+                        icon: renderStatus(response),
+                    }
+                );
+            },
+            complete: () => {
+                console.log("Observable completed");
+            },
+            error: (error) => {
+                console.error("Observable error:", error);
+            },
+        });
+
+        // Clean up the subscription when the component unmounts
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [checks, isAuthenticated]);
 
     const renderStatus = (value: AccountCheckModel) => {
         switch (value.type) {
@@ -59,45 +104,17 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
         }
     };
 
-    useEffect(() => {
-        const subscription = observable.subscribe({
-            next: (response) => {
-                toast(
-                    (t) => (
-                        <span>
-                            <strong>{response.title}</strong>
-                            <p>{response.messageTemplate}</p>
-                        </span>
-                    ),
-                    {
-                        icon: renderStatus(response),
-                    }
-                );
-            },
-            complete: () => {
-                console.log("Observable completed");
-            },
-            error: (error) => {
-                console.error("Observable error:", error);
-            },
-        });
-
-        // Clean up the subscription when the component unmounts
-        return () => {
-            subscription.unsubscribe();
-        };
-    }, [checks]);
-
-    useEffect(() => {
-        Axios.get("/api/check/me").then((resp) => {
-            let newData: AccountCheckModel[] = resp.data;
-            setChecks(newData);
-        });
-    }, []);
-
     if (!isAuthenticated) return;
 
-    return <Toaster position="bottom-left" reverseOrder={false} />;
+    return (
+        <Toaster
+            toastOptions={{
+                duration: 10000,
+            }}
+            position="bottom-left"
+            reverseOrder={false}
+        />
+    );
 };
 
 export default AccountChecks;
