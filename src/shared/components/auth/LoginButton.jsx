@@ -91,6 +91,9 @@ const LoginButton = () => {
             <Link className="dropdown-item" to={"/app/orders"}>
               Orders
             </Link>
+            <Link className="dropdown-item" to={"/dashboard"}>
+              Dashboard
+            </Link>
             <Dropdown.Divider />
             <a className="dropdown-item" href="#" onClick={handleLogin}>
               Logout
