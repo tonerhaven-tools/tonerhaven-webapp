@@ -34,7 +34,6 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
             }
         });
         return () => {
-
             console.log("Loaded base api, will not load again")
         };
     }, []);
