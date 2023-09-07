@@ -6,10 +6,10 @@ import Logo from "@/shared/components/Logo";
 import { Link } from "react-router-dom";
 import { Badge, Nav, NavItem } from "react-bootstrap";
 import LoginButton from "@/shared/components/auth/LoginButton";
+import CartButton from "./purchase/CartButton";
 
 const Appbar = () => {
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  const [cartCount, setCartCount] = useState(0);
 
   const handleLogin = () => {
     if (!isAuthenticated) loginWithRedirect();
@@ -47,23 +47,7 @@ const Appbar = () => {
 
           {/* Navbar Right */}
           <ul className="navbar-nav ms-auto">
-            <li hidden={!isAuthenticated} className="nav-item">
-              <Link
-                id="num_cart_items"
-                className="nav-link"
-                tabIndex="-1"
-                to={"/cart"}
-              >
-                🛒 Cart{" "}
-                {cartCount > 0 ? (
-                  <Badge pill bg="danger">
-                    {cartCount}
-                  </Badge>
-                ) : (
-                  <></>
-                )}
-              </Link>
-            </li>
+            <CartButton isAuthenticated={isAuthenticated} />
             <LoginButton />
           </ul>
         </Navbar.Collapse>

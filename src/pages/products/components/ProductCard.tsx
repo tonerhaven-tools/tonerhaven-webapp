@@ -1,13 +1,12 @@
 import { server_url } from "@/shared/http/ServerAxios";
 import { SyntheticEvent } from "react";
 import { Product } from "types/global.d.ts";
-import { motion, useAnimation } from "framer-motion";
-
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-
 import ContentLoader from "react-content-loader";
 import { Card } from "react-bootstrap";
-import CardHeader from "react-bootstrap/esm/CardHeader";
+import useCart from "@/shared/hooks/store/useCheckout";
+import { toast } from "react-hot-toast";
 
 interface ProductCardProps {
     key: React.Key;
@@ -16,6 +15,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
     const [isLoading, setLoading] = useState(true);
+
+    const { onCart, addCart } = useCart();
 
     const onImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
         const img = e.currentTarget;
@@ -77,7 +78,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
                     </Card.Subtitle>
                 </Card.Body>
                 <Card.Footer className="border-0">
-                    <button className={"add-cart"}>🛒 Add to cart</button>
+                    <button
+                        onClick={() => {
+                            if (!onCart.some((item) => item.id == product.id)) {
+                                addCart(product);
+                                toast.success(`Item ${product.name} added`);
+                            } else {
+                                toast.error(`${product.name} already exists in the cart.`);
+                            }
+                        }}
+                        className={"add-cart"}
+                    >
+                        🛒 Add to cart
+                    </button>
                 </Card.Footer>
             </Card>
         </motion.div>
