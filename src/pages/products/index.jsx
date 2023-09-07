@@ -19,15 +19,20 @@ export default function Products() {
     }
   }, []);
 
+  const renderProducts = () => {
+    if (!products || products.length <= 0) return <div>No Items</div>;
+    return (
+      <div className="row">
+        {products?.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    );
+  };
+
   return (
     <Page title="Toner Haven | All Products!">
-      <Layout header="Our Products">
-        <div className="row">
-          {products?.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </Layout>
+      <Layout header="Our Products">{renderProducts()}</Layout>
     </Page>
   );
 }
