@@ -1,7 +1,7 @@
 import { Layout, Page } from "@/shared/components";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import Axios from "axios";
+import ServerAxios, {server_url} from "../../shared/http/ServerAxios";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,8 +11,8 @@ const Products = () => {
   }, []);
 
   const FetchProducts = () => {
-    const url = "/api/products/all-products";
-    Axios.get(url).then((response) => {
+    const url = `/api/products/all-products`;
+    ServerAxios.get(url).then((response) => {
       console.log(response.data);
       setProducts(response.data);
     });
@@ -35,7 +35,7 @@ const Products = () => {
                 <img
                   id={`product-img-${product.name}`}
                   className={"img-responsive"}
-                  src={`/api/storage/uploads/products/${product.thumbnail}`}
+                  src={`${server_url}/storage/uploads/products/${product.thumbnail}`}
                   onError={(e) => onImageError(e, product)}
                 />
                 <div className={"name"}>{product.name}</div>
