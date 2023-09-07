@@ -119,11 +119,7 @@ const Profile = () => {
 
   return (
     <Page title={"Toner Haven | My Profile"}>
-      <SecuredLayout>
-        <h2>
-          <strong>Manage Profile</strong>
-        </h2>
-        <hr />
+      <SecuredLayout header="My Account">
         <Form noValidate onSubmit={formik.handleSubmit}>
           <Row>
             <Col xl={6}>

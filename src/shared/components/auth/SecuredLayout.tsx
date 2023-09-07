@@ -2,20 +2,22 @@ import React, { ReactNode, Suspense } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NotAuthorized } from "@/shared/components/default_pages";
 import { Container } from "react-bootstrap";
+import LayoutHeader from "../LayoutHeader";
 
 const AccountChecks = React.lazy(() => import("../AccountChecks"));
 const LiveChat = React.lazy(() => import("../LiveChat"));
 const Appbar = React.lazy(() => import("../Appbar"));
 const Footer = React.lazy(() => import("../Footer"));
 
-
 /// Contains layout that are required to be secured
 interface SecuredLayoutProps {
     children: ReactNode;
+    header?: string;
 }
 
 const SecuredLayout: React.FC<SecuredLayoutProps> = ({
     children,
+    header = undefined,
 }) => {
     const { isAuthenticated, isLoading, user } = useAuth0();
 
@@ -35,6 +37,7 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
             <Appbar />
             <AccountChecks />
             <Container className="mt-3">
+                <LayoutHeader header={header} />
                 {isAuthenticated ? children : <NotAuthorized />}
             </Container>
             <Footer />

@@ -5,10 +5,11 @@ import { Container } from "react-bootstrap";
 export default function Orders() {
   return (
     <Page title={"Toner Haven | Orders"}>
-      <SecuredLayout>
-        <h2>
-          <strong>My Orders</strong>
-        </h2>
+      <SecuredLayout header="My Orders">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum quis
+        possimus, vel quos et quae voluptate repellat aliquam provident, at
+        nesciunt natus rerum architecto rem nam impedit molestiae
+        exercitationem? Suscipit!
       </SecuredLayout>
     </Page>
   );

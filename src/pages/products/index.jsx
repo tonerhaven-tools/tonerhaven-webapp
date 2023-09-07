@@ -1,53 +1,33 @@
 import { Layout, Page } from "@/shared/components";
+import ServerAxios from "../../shared/http/ServerAxios";
+import ProductCard from "./components/ProductCard";
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import ServerAxios, { server_url } from "../../shared/http/ServerAxios";
+import { toast } from "react-hot-toast";
 
-const Products = () => {
+export default function Products() {
   const [products, setProducts] = useState([]);
+  const [isMounted, setMounted] = useState(false);
 
   useEffect(() => {
-    FetchProducts();
+    if (!isMounted) {
+      ServerAxios.get("/api/products/all-products").then((resp) => {
+        setProducts(resp.data);
+        return Promise.resolve(resp);
+      });
+
+      setMounted(true);
+    }
   }, []);
 
-  const FetchProducts = () => {
-    const url = `/api/products/all-products`;
-    ServerAxios.get(url).then((response) => {
-      console.log(response.data);
-      setProducts(response.data);
-    });
-  };
-
-  const onImageError = (e, item) => {
-    const img = document.getElementById(`product-img-${item.name}`);
-    img.src = "/images/product.png";
-  };
-
   return (
-    <Page title={"Toner Haven | All Products!"}>
-      <Layout>
-        <h1 className={"text-center"}>Products Page</h1>
-
+    <Page title="Toner Haven | All Products!">
+      <Layout header="Our Products">
         <div className="row">
-          {products.map((product, key) => (
-            <div className="col-md-3" key={key}>
-              <div className="product">
-                <img
-                  id={`product-img-${product.name}`}
-                  className={"img-responsive"}
-                  src={`${server_url}/storage/uploads/products/${product.thumbnail}`}
-                  onError={(e) => onImageError(e, product)}
-                />
-                <div className={"name"}>{product.name}</div>
-                <div className={"price"}>${product.our_price}</div>
-                <button className={"add-cart"}>🛒 Add to cart</button>
-              </div>
-            </div>
+          {products?.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </Layout>
     </Page>
   );
-};
-
-export default Products;
+}
