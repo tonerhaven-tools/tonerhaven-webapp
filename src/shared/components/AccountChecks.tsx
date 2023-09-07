@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { from, distinctUntilChanged, distinct, mergeMap } from "rxjs";
 
 import toast, { Toaster } from "react-hot-toast";
+import ServerAxios from "../http/ServerAxios";
 
 interface AccountCheckModel {
     id: number;
@@ -26,7 +27,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
     let observable = from(checks);
 
     useEffect(() => {
-        Axios.get("/api/check/me").then((resp) => {
+        ServerAxios.get(`/api/check/me`).then((resp) => {
             if (resp.status == 200) {
                 let newData: AccountCheckModel[] = resp.data;
                 if (checks !== newData) {

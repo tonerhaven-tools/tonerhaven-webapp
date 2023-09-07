@@ -17,6 +17,7 @@ import {
   Button,
   FloatingLabel,
 } from "react-bootstrap";
+import ServerAxios from "@/shared/http/ServerAxios";
 
 const validationSchema = yup.object().shape({
   first_name: yup.string().required(),
@@ -46,15 +47,16 @@ const useFormSubmissionObservable = () => {
       error: "Something went wrong.",
     };
 
+    formSubmitSubject.next(data);
+
     if (data.id > 0) {
-      const action = Axios.put(`/api/profiles/${data.id}`, data);
+      const action = ServerAxios.put(`/api/profiles/${data.id}`, data);
       toast.promise(action, responses);
     } else {
-      const action = Axios.post("/api/profiles/create", data);
+      const action = ServerAxios.post("/api/profiles/create", data);
       toast.promise(action, responses);
     }
     setFormSubmitted(false);
-    formSubmitSubject.next(data);
   };
 
   return {
@@ -73,7 +75,7 @@ const Profile = () => {
 
   const handleInitialize = () => {
     if (user !== undefined) {
-      Axios.get(`/api/profiles/${user.sub}`).then((resp) => {
+      ServerAxios.get(`/api/profiles/${user.sub}`).then((resp) => {
         if (resp.data !== "") {
           setData(resp.data);
         }
@@ -221,8 +223,9 @@ const Profile = () => {
             </FloatingLabel>
           </FormGroup>
 
-          <div className="mt-3 align-right">
-            <Button type="submit">Save</Button>
+          <div className="mt-3 align-right flex-between">
+            <div />
+            <Button type="submit">Save Profile</Button>
           </div>
         </Form>
       </SecuredLayout>
