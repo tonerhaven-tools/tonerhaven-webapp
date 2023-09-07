@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import useOnboarding from "@/shared/hooks/store/useOnboarding";
 import Axios from "axios";
 import { status } from "nprogress";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const [email_sent, setSendEmailState] = useState(false);
@@ -27,6 +28,7 @@ const Profile = () => {
   const { isLoading, isAuthenticated, user } = useAuth0();
 
   const [data, setData] = useState({
+    id: 0,
     first_name: new_acct && user !== undefined ? user.given_name : "",
     last_name: new_acct && user !== undefined ? user.family_name : "",
     address: new_acct && user !== undefined ? "" : "",
@@ -37,14 +39,18 @@ const Profile = () => {
     auth_id: new_acct && user !== undefined ? user.sub : "",
   });
 
+  const handleInitialize = () => {
+    Axios.get(`/api/profiles/${user.sub}`).then((resp) => {
+      if (resp.data !== "") {
+        setData(resp.data);
+        setNewAcct(false);
+      }
+    });
+  };
+
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
-      Axios.get(`/api/profiles/${user.sub}`).then((resp) => {
-        if (resp.data !== "") {
-          setData(resp.data);
-          setNewAcct(false);
-        }
-      });
+      handleInitialize();
     }
   }, []);
 
@@ -71,11 +77,23 @@ const Profile = () => {
       auth_id: data.auth_id,
     },
     onSubmit: (value) => {
-      Axios.post("/api/profiles/create", value).then((resp) => {
-        if (resp.status == 201) {
-          alert("added");
-        }
-      });
+      if (data.id > 0) {
+        Axios.put(`/api/profiles/${data.id}`, value).then((resp) => {
+          if (resp.status == 204) {
+            toast.success("Saved!");
+            handleInitialize();
+          }
+        });
+      } else {
+        Axios.post("/api/profiles/create", value).then((resp) => {
+          if (resp.status == 201) {
+            toast.success(
+              "Thank you! your details has been successfully submitted"
+            );
+            handleInitialize();
+          }
+        });
+      }
     },
   });
 

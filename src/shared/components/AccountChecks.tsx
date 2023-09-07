@@ -29,8 +29,11 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
         Axios.get("/api/check/me").then((resp) => {
             if (resp.status == 200) {
                 let newData: AccountCheckModel[] = resp.data;
-                setChecks(newData);
-                console.log(newData);
+                if (checks !== newData) {
+                    setChecks(newData);
+                    console.log(newData);
+                }
+
             }
         });
         return () => {
