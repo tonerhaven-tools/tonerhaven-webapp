@@ -40,24 +40,20 @@ const useFormSubmissionObservable = () => {
   });
 
   const handleSubmit = (data) => {
+    const responses = {
+      loading: "Saving profile, please wait...",
+      success: "Saved",
+      error: "Something went wrong.",
+    };
+
     if (data.id > 0) {
-      Axios.put(`/api/profiles/${data.id}`, data).then((resp) => {
-        if (resp.status === 204) {
-          toast.success("Saved!");
-        }
-      });
+      const action = Axios.put(`/api/profiles/${data.id}`, data);
+      toast.promise(action, responses);
     } else {
-      Axios.post("/api/profiles/create", data).then((resp) => {
-        if (resp.status === 201) {
-          toast.success(
-            "Thank you! your details have been successfully submitted"
-          );
-        }
-      });
+      const action = Axios.post("/api/profiles/create", data);
+      toast.promise(action, responses);
     }
     setFormSubmitted(false);
-
-    // Trigger the form submission event with a data payload
     formSubmitSubject.next(data);
   };
 
@@ -226,9 +222,7 @@ const Profile = () => {
           </FormGroup>
 
           <div className="mt-3 align-right">
-            <Button disabled={formSubmitted} type="submit">
-              Save
-            </Button>
+            <Button type="submit">Save</Button>
           </div>
         </Form>
       </SecuredLayout>

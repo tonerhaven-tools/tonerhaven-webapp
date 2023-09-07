@@ -33,13 +33,9 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
                     setChecks(newData);
                     console.log(newData);
                 }
-
             }
         });
-        return () => {
-            toast.dismiss();
-            console.log("Loaded base api, will not load again")
-        };
+        return () => { };
     }, []);
 
     if (isAuthenticated && checks.length > 0) {
@@ -60,19 +56,19 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
     useEffect(() => {
         const subscription = observable.subscribe({
             next: (response) => {
-                toast(
-                    (t) => (
-                        <span>
-                            <strong>{response.title}</strong>
-                            <div>
-                                <small>{response.messageTemplate}</small>
-                            </div>
-                        </span>
-                    ),
-                    {
-                        icon: renderStatus(response),
-                    }
-                );
+                // toast(
+                //     (t) => (
+                //         <span>
+                //             <strong>{response.title}</strong>
+                //             <div>
+                //                 <small>{response.messageTemplate}</small>
+                //             </div>
+                //         </span>
+                //     ),
+                //     {
+                //         icon: renderStatus(response),
+                //     }
+                // );
             },
             complete: () => {
                 console.log("Observable completed");
@@ -109,15 +105,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
 
     if (!isAuthenticated) return;
 
-    return (
-        <Toaster
-            toastOptions={{
-                duration: 10000,
-            }}
-            position="bottom-left"
-            reverseOrder={false}
-        />
-    );
+    return <Toaster position="top-center" reverseOrder={false} />;
 };
 
 export default AccountChecks;
