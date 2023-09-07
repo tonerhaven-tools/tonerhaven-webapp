@@ -2,6 +2,7 @@ import Props from "prop-types";
 import { Container } from "react-bootstrap";
 import React, { ReactNode, Suspense } from "react";
 import LayoutHeader from "./LayoutHeader";
+import { WindmillSpinner } from "react-spinner-overlay";
 
 const AccountChecks = React.lazy(() => import("./AccountChecks"));
 const LiveChat = React.lazy(() => import("./LiveChat"));
@@ -15,7 +16,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, header = undefined }) => {
   return (
-    <Suspense fallback={<div>Loading..</div>}>
+    <Suspense  >
       <LiveChat />
       <Appbar />
       <AccountChecks />

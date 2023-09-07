@@ -33,7 +33,7 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
         );
 
     return (
-        <Suspense fallback={<div>Loading..</div>}>
+        <Suspense>
             <Appbar />
             <AccountChecks />
             <Container className="mt-3">
