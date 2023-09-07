@@ -17,14 +17,10 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
     const [isLoading, setLoading] = useState(true);
 
-    const [isZoomed, setIsZoomed] = useState(false);
-    const controls = useAnimation();
-
     const onImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
         const img = e.currentTarget;
         img.src = "/images/product.png";
     };
-
 
     const imagePreloader = (product: Product) => {
         if (isLoading)
@@ -59,11 +55,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
     };
 
     useEffect(() => {
-        return () => {
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000);
-        };
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
     }, []);
 
     return (
