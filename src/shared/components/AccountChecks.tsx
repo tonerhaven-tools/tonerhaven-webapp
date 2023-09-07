@@ -34,6 +34,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
             }
         });
         return () => {
+            toast.dismiss();
             console.log("Loaded base api, will not load again")
         };
     }, []);
