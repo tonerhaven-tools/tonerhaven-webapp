@@ -1,7 +1,7 @@
 import { Layout, Page } from "@/shared/components";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import ServerAxios, {server_url} from "../../shared/http/ServerAxios";
+import ServerAxios, { server_url } from "../../shared/http/ServerAxios";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +20,7 @@ const Products = () => {
 
   const onImageError = (e, item) => {
     const img = document.getElementById(`product-img-${item.name}`);
-    img.src = "/images/favicon.png";
+    img.src = "/images/product.png";
   };
 
   return (
