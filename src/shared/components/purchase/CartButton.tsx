@@ -6,11 +6,9 @@ import useCart from "@/shared/hooks/store/useCheckout";
 
 // import { Product } from "types/global.d.ts";
 
-interface CartButtonProps {
-    isAuthenticated: boolean;
-}
+interface CartButtonProps { }
 
-const CartButton: React.FC<CartButtonProps> = ({ isAuthenticated }) => {
+const CartButton: React.FC<CartButtonProps> = ({ }) => {
     const { onCart } = useCart();
 
     const renderBadge = () => {
@@ -33,7 +31,7 @@ const CartButton: React.FC<CartButtonProps> = ({ isAuthenticated }) => {
     };
 
     return (
-        <li hidden={!isAuthenticated} className="nav-item">
+        <li className="nav-item">
             <Link id="num_cart_items" className="nav-link" to={"/cart"}>
                 <div className="flex-between">
                     <span>🛒 Cart </span>

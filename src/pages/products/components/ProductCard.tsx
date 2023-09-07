@@ -80,9 +80,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
                 <Card.Footer className="border-0">
                     <button
                         onClick={() => {
+                            const responses = {
+                                loading: "Adding to cart, please wait...",
+                                success: `Item ${product.name} added`,
+                                error: "Something went wrong.",
+                            };
+
                             if (!onCart.some((item) => item.id == product.id)) {
-                                addCart(product);
-                                toast.success(`Item ${product.name} added`);
+                                toast.promise(Promise.resolve(addCart(product)), responses);
                             } else {
                                 toast.error(`${product.name} already exists in the cart.`);
                             }

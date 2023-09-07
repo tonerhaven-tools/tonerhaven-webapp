@@ -5,7 +5,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 interface UseCartStateProps {
   onCart: Product[];
-  addCart: (product: Product) => void;
+  addCart: (product: Product) => Promise<Product>;
+  clearCart: () => void;
 }
 
 const useCart = create<UseCartStateProps>()(
@@ -17,6 +18,10 @@ const useCart = create<UseCartStateProps>()(
         if (!tempCart.some((item) => item.id === product.id)) {
           set({ onCart: [...tempCart, product] });
         }
+        return Promise.resolve(product);
+      },
+      clearCart: () => {
+        set({ onCart: [] });
       },
     }),
     {
