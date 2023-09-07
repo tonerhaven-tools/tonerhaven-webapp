@@ -44,7 +44,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
             distinct((check) => check.id),
             mergeMap((check) => {
                 return from(
-                    Axios.get(check.route, {
+                    ServerAxios.get(check.route, {
                         headers: {
                             auth_id: user?.sub,
                         },
