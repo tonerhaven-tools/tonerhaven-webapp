@@ -6,6 +6,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 interface UseCartStateProps {
   onCart: Product[];
   addCart: (product: Product) => Promise<Product>;
+  removeItem: (product: Product) => Promise<Product>;
   clearCart: () => void;
 }
 
@@ -18,6 +19,12 @@ const useCart = create<UseCartStateProps>()(
         if (!tempCart.some((item) => item.id === product.id)) {
           set({ onCart: [...tempCart, product] });
         }
+        return Promise.resolve(product);
+      },
+      removeItem: (product: Product) => {
+        const tempCart = get().onCart;
+        const updatedCart = tempCart.filter((item) => item.id !== product.id);
+        set({ onCart: updatedCart });
         return Promise.resolve(product);
       },
       clearCart: () => {

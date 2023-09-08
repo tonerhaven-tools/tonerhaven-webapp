@@ -1,8 +1,7 @@
 import { Layout, Page } from "@/shared/components";
 import ServerAxios from "../../shared/http/ServerAxios";
-import ProductCard from "./components/ProductCard";
+import ProductCard from "../../shared/components/product/ProductCard";
 import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 
 export default function Products() {
   const [products, setProducts] = useState([]);

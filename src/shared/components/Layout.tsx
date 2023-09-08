@@ -11,16 +11,21 @@ const Footer = React.lazy(() => import("./Footer"));
 interface LayoutProps {
   children: ReactNode;
   header?: string;
+  headerOptions?: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, header = undefined }) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  header = undefined,
+  headerOptions = undefined,
+}) => {
   return (
-    <Suspense  >
+    <Suspense>
       <LiveChat />
       <Appbar />
       <AccountChecks />
       <Container className="mt-3">
-        <LayoutHeader header={header} />
+        <LayoutHeader header={header} options={headerOptions} />
         <div className="content-spacer">{children}</div>
       </Container>
       <Footer />

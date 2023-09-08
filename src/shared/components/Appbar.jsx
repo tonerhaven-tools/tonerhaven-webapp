@@ -47,7 +47,7 @@ const Appbar = () => {
 
           {/* Navbar Right */}
           <ul className="navbar-nav ms-auto">
-            <CartButton isAuthenticated={isAuthenticated} />
+            <CartButton />
             <LoginButton />
           </ul>
         </Navbar.Collapse>
