@@ -5,6 +5,7 @@ import ProductImage from "../product/ProductImage";
 import QuantityControl from "./QuantityControl";
 import useCheckout from "@/shared/hooks/store/useCheckout";
 import { useState } from "react";
+import { Trash } from "react-bootstrap-icons";
 
 interface CartItemProps {
     item: Product;
@@ -49,7 +50,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, key }) => {
             </td>
             <td>
                 <Button size="sm" variant="link" onClick={() => removeItem(item)}>
-                    Remove
+                    <Trash color="#c0392b" />
                 </Button>
             </td>
         </tr>
