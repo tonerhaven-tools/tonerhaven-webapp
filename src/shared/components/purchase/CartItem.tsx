@@ -19,19 +19,21 @@ const CartItem: React.FC<CartItemProps> = ({ item, key }) => {
     return (
         <tr className="p-4">
             <td>
-                <div className="d-flex flex-row w-50">
+                <div className="d-flex flex-row w-75">
                     <img
                         className="m-2"
                         style={{ height: 50, width: 50 }}
                         src="/images/product.png"
                     />
                     <div>
-                        <h6>
+                        <small>
                             <strong>{item.name}</strong>
-                        </h6>
-                        <p>{item.color}</p>
+                        </small>
                     </div>
                 </div>
+            </td>
+            <td className="text-center">
+                <small>{item.color}</small>
             </td>
             <td className="w-25">
                 <QuantityControl
@@ -40,11 +42,13 @@ const CartItem: React.FC<CartItemProps> = ({ item, key }) => {
                     }}
                 />
             </td>
-            <td className="w-25">
-                <strong>${parseInt(item.our_price as string) * currentCount}</strong>
+            <td className="w-25 text-center">
+                <small>
+                    <strong>${parseInt(item.our_price as string) * currentCount}</strong>
+                </small>
             </td>
             <td>
-                <Button variant="link" onClick={() => removeItem(item)}>
+                <Button size="sm" variant="link" onClick={() => removeItem(item)}>
                     Remove
                 </Button>
             </td>

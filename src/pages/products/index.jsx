@@ -19,7 +19,12 @@ export default function Products() {
   }, []);
 
   const renderProducts = () => {
-    if (!products || products.length <= 0) return <div>No Items</div>;
+    if (!products || products.length <= 0)
+      return (
+        <div>
+          Hello! Please hang tight while we load your data. It won't be long!
+        </div>
+      );
     return (
       <div className="row">
         {products?.map((product) => (

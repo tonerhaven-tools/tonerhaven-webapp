@@ -2,6 +2,14 @@ import { Layout, Page } from "@/shared/components";
 import CartItem from "@/shared/components/purchase/CartItem";
 import { Button, Container, Table } from "react-bootstrap";
 import useCart from "@/shared/hooks/store/useCheckout";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  BagCheck,
+  Cart2,
+  CartPlus,
+  ChevronLeft,
+} from "react-bootstrap-icons";
 
 const Cart = () => {
   const { clearCart, onCart } = useCart();
@@ -27,9 +35,10 @@ const Cart = () => {
         {onCart.length > 0 ? (
           <Table>
             <thead>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Total Price</th>
+              <th className="text-center">Product</th>
+              <th className="text-center">Color</th>
+              <th className="text-center">Quantity</th>
+              <th className="text-center">Total Price</th>
               <th />
             </thead>
             <tbody>
@@ -39,11 +48,32 @@ const Cart = () => {
             </tbody>
           </Table>
         ) : (
-          <div>Your cart is empty</div>
+          <div className="m-5">
+            Hello there! Your shopping cart is currently empty. Feel free to
+            explore our fantastic products and add them to your cart whenever
+            you're ready. Happy shopping!
+          </div>
         )}
         <div className="flex-between">
-          <div />
-          <Button hidden={onCart.length <= 0}>Checkout</Button>
+          <Link to={"/products"}>
+            <Button
+              className="p-2"
+              variant="light"
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              <ChevronLeft className="m-1" />
+              <span className="m-1">Continue Shopping</span>
+            </Button>
+          </Link>
+          <Button className="p-2" hidden={onCart.length <= 0}>
+            <BagCheck className="m-1" />
+            <span className="m-1">Checkout</span>
+          </Button>
         </div>
       </Layout>
     </Page>
