@@ -6,6 +6,7 @@ export default function Overview() {
   const [ products, setProducts ] = useState([]);
   const [ categories, setCategories ] = useState([]);
   const [ modalActive, setModalActive ] = useState("none");
+
   const ToggleModal = () => {
     if (modalActive == 'block') {
       setModalActive('none');
@@ -53,23 +54,26 @@ export default function Overview() {
     form.append("compatible_with", ref_compatible_with.current.value);
     form.append("suppliers_price", ref_suppliers_price.current.value);
     form.append("our_price",       ref_our_price.current.value);
-    form.append("thumbnail",       ref_thumbnail.current.value);
+    form.append("thumbnail",       ref_thumbnail.current.files[0]);
 
-    ServerAxios.post("/api/dashboard/store-product", form, {
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
+    const headers = {headers:{'Content-Type': 'multipart/form-data'}}
+    ServerAxios.post("/api/dashboard/store-product",form,headers).then(res => {
       console.log(res.data);
+      setModalActive("none");
+      FetchRequiredData();
     });
-
   }
 
-
-
-
+  const DeleteProduct = (product_id) => {
+    if (confirm("Delete this product?")) {
+      const form = new FormData;
+      form.append('product_id', product_id);
+      ServerAxios.post("/api/dashboard/destroy-product",form).then(res=>{
+        console.log(res.data);
+        FetchRequiredData();
+      });
+    }
+  }
 
   useEffect(() => {
     FetchRequiredData();
@@ -102,7 +106,7 @@ export default function Overview() {
               <td>${product.our_price}</td>
               <td>
                 <button className={'btn btn-primary'}>Edit</button>&nbsp;
-                <button className={'btn btn-danger'}>Delete</button>
+                <button onClick={()=>DeleteProduct(product.id)} className={'btn btn-danger'}>Delete</button>
               </td>
             </tr>
           ))}
