@@ -1,5 +1,4 @@
 import { server_url } from "@/shared/http/ServerAxios";
-import { SyntheticEvent } from "react";
 import { Product } from "types/global.d.ts";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -7,6 +6,7 @@ import ContentLoader from "react-content-loader";
 import { Card } from "react-bootstrap";
 import useCart from "@/shared/hooks/store/useCheckout";
 import { toast } from "react-hot-toast";
+import ProductImage from "./ProductImage";
 
 interface ProductCardProps {
     key: React.Key;
@@ -14,52 +14,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
-    const [isLoading, setLoading] = useState(true);
-
     const { onCart, addCart } = useCart();
-
-    const onImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-        const img = e.currentTarget;
-        img.src = "/images/product.png";
-    };
-
-    const imagePreloader = (product: Product) => {
-        if (isLoading)
-            return (
-                <div className="m-3 ">
-                    <ContentLoader
-                        style={{
-                            borderTopLeftRadius: 10,
-                            borderTopRightRadius: 10,
-                        }}
-                        speed={1}
-                        width={"100%"}
-                        height={"100%"}
-                        viewBox="0 0 100% 100%"
-                        backgroundColor="#d9d9d9"
-                        foregroundColor="#ededed"
-                    >
-                        <rect width="100%" height="100%" />
-                    </ContentLoader>
-                </div>
-            );
-
-        return (
-            <Card.Img
-                variant="top"
-                id={`product-img-${product.name}`}
-                className={"img-responsive"}
-                src={`${server_url}/storage/uploads/products/${product.thumbnail}`}
-                onError={(e) => onImageError(e)}
-            />
-        );
-    };
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-    }, []);
 
     return (
         <motion.div
@@ -70,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
             transition={{ type: "spring", damping: 10, stiffness: 100 }}
         >
             <Card className="product border-0 bg-light">
-                {imagePreloader(product)}
+                <ProductImage product={product} />
                 <Card.Body>
                     <Card.Title className={"name"}>{product.name}</Card.Title>
                     <Card.Subtitle className={"price"}>
