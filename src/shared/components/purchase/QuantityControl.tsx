@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, FormControl } from "react-bootstrap";
+import { Plus, DashLg } from "react-bootstrap-icons";
 
 interface QuantityControl {
     onChange: (count: number) => void;
@@ -33,7 +34,7 @@ const QuantityControl: React.FC<QuantityControl> = ({ onChange }) => {
     return (
         <div className="flex-between m-1 justify-content-center align-items-center">
             <Button onClick={increment} variant="light" size="sm" className="m-1">
-                +
+                <Plus />
             </Button>
             <FormControl
                 onBlur={(e) => {
@@ -45,7 +46,7 @@ const QuantityControl: React.FC<QuantityControl> = ({ onChange }) => {
                     setCount(parseInt(e.target.value));
                 }}
                 className="text-center"
-                style={{ width: "100%" }}
+                style={{ width: "100%", maxWidth: "80px" }}
                 value={count}
             />
             <Button
@@ -55,7 +56,7 @@ const QuantityControl: React.FC<QuantityControl> = ({ onChange }) => {
                 size="sm"
                 className="m-1"
             >
-                -
+                <DashLg />
             </Button>
         </div>
     );
