@@ -1,5 +1,4 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import Axios from "axios";
 import { ReactNode, useEffect, useState } from "react";
 import { from, distinctUntilChanged, distinct, mergeMap } from "rxjs";
 
@@ -106,7 +105,7 @@ const AccountChecks: React.FC<AccountChecksProps> = ({ }) => {
 
     if (!isAuthenticated) return;
 
-    return <Toaster position="top-center" reverseOrder={false} />;
+    return <></>;
 };
 
 export default AccountChecks;

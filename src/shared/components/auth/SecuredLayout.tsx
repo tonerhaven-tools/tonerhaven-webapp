@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { NotAuthorized } from "@/shared/components/default_pages";
 import { Container } from "react-bootstrap";
 import LayoutHeader from "../LayoutHeader";
+import { Toaster } from "react-hot-toast";
 
 const AccountChecks = React.lazy(() => import("../AccountChecks"));
 const LiveChat = React.lazy(() => import("../LiveChat"));
@@ -34,8 +35,11 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
 
     return (
         <Suspense>
+            <LiveChat />
             <Appbar />
             <AccountChecks />
+            <Toaster position="top-center" reverseOrder={false} />
+
             <Container className="mt-3">
                 <LayoutHeader header={header} />
                 {isAuthenticated ? children : <NotAuthorized />}

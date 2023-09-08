@@ -1,25 +1,22 @@
 import { server_url } from "@/shared/http/ServerAxios";
 import { Product } from "types/global.d.ts";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import ContentLoader from "react-content-loader";
 import { Card } from "react-bootstrap";
 import useCart from "@/shared/hooks/store/useCheckout";
 import { toast } from "react-hot-toast";
 import ProductImage from "./ProductImage";
+import React from "react";
 
 interface ProductCardProps {
-    key: React.Key;
     product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, key }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { onCart, addCart } = useCart();
 
     return (
         <motion.div
             className="col-md-3"
-            key={key}
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", damping: 10, stiffness: 100 }}

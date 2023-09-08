@@ -9,7 +9,12 @@ import "nprogress/nprogress.css";
 
 import { Auth0Provider } from "@auth0/auth0-react";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+import { createRoot } from "react-dom/client";
+import { Routes } from "@generouted/react-router";
+
+const app = document.getElementById("root");
+
+createRoot(app).render(
   <React.StrictMode>
     <Auth0Provider
       domain="dev-wy7vwm5m.us.auth0.com"
@@ -18,7 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         redirect_uri: window.location.origin,
       }}
     >
-      <App />
+      <Routes />
     </Auth0Provider>
   </React.StrictMode>
 );
+
+// ReactDOM.createRoot(document.getElementById("root")).render(
+
+// );

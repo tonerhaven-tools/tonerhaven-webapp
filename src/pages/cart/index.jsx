@@ -1,15 +1,10 @@
 import { Layout, Page } from "@/shared/components";
-import CartItem from "@/shared/components/purchase/CartItem";
-import { Button, Container, Table } from "react-bootstrap";
-import useCart from "@/shared/hooks/store/useCheckout";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  BagCheck,
-  Cart2,
-  CartPlus,
-  ChevronLeft,
-} from "react-bootstrap-icons";
+
+import { Col, Container, Row, Button } from "react-bootstrap";
+import { BagCheck, ChevronLeft } from "react-bootstrap-icons";
+import CartTable from "@/shared/components/purchase/CartTable";
+import useCart from "@/shared/hooks/store/useCheckout";
 
 const Cart = () => {
   const { clearCart, onCart } = useCart();
@@ -32,28 +27,7 @@ const Cart = () => {
           </>
         }
       >
-        {onCart.length > 0 ? (
-          <Table>
-            <thead>
-              <th className="text-center">Product</th>
-              <th className="text-center">Color</th>
-              <th className="text-center">Quantity</th>
-              <th className="text-center">Total Price</th>
-              <th />
-            </thead>
-            <tbody>
-              {onCart.map((item, idx) => {
-                return <CartItem item={item} key={idx} />;
-              })}
-            </tbody>
-          </Table>
-        ) : (
-          <div className="m-5">
-            Hello there! Your shopping cart is currently empty. Feel free to
-            explore our fantastic products and add them to your cart whenever
-            you're ready. Happy shopping!
-          </div>
-        )}
+        <CartTable />
         <div className="flex-between">
           <Link to={"/products"}>
             <Button

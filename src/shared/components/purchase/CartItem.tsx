@@ -9,18 +9,21 @@ import { Trash } from "react-bootstrap-icons";
 
 interface CartItemProps {
     item: Product;
-    key: React.Key;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, key }) => {
+const CartItem: React.FC<CartItemProps> = ({ item }) => {
     const { removeItem } = useCheckout();
 
     const [currentCount, setCount] = useState(1);
-
     return (
         <tr className="p-4">
             <td>
-                <div className="d-flex flex-row w-75">
+                <div
+                    style={{
+                        cursor: "pointer",
+                    }}
+                    className="d-flex flex-row w-75"
+                >
                     <img
                         className="m-2"
                         style={{ height: 50, width: 50 }}

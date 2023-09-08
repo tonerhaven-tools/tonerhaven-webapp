@@ -34,7 +34,6 @@ const ProductImage: React.FC<ProductImageProps> = ({ product }) => {
                     speed={1}
                     width={"100%"}
                     height={"100%"}
-                    viewBox="0 0 100% 100%"
                     backgroundColor="#d9d9d9"
                     foregroundColor="#ededed"
                 >
