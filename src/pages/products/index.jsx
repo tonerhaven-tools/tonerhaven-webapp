@@ -9,7 +9,7 @@ export default function Products() {
 
   useEffect(() => {
     if (!isMounted) {
-      ServerAxios.get("/api/products/all-products").then((resp) => {
+      ServerAxios.get("/api/products").then((resp) => {
         setProducts(resp.data);
         return Promise.resolve(resp);
       });
