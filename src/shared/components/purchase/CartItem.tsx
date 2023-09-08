@@ -4,6 +4,7 @@ import { Product } from "types/global.d.ts";
 import ProductImage from "../product/ProductImage";
 import QuantityControl from "./QuantityControl";
 import useCheckout from "@/shared/hooks/store/useCheckout";
+import { useState } from "react";
 
 interface CartItemProps {
     item: Product;
@@ -13,38 +14,41 @@ interface CartItemProps {
 const CartItem: React.FC<CartItemProps> = ({ item, key }) => {
     const { removeItem } = useCheckout();
 
-    return (
-        <Card className="mb-3" key={key}>
-            <Card.Body>
-                <div className="flex-between ">
-                    <div className="flex-between">
-                        <img
-                            className="m-1"
-                            style={{ height: 110, width: 110 }}
-                            src="/images/product.png"
-                        />
+    const [currentCount, setCount] = useState(1);
 
-                        <div>
-                            <strong>
-                                <Link target="_blank" to={`/products/${item.id}`}>
-                                    {item.name}
-                                </Link>
-                            </strong>
-                            <p>{item.color}</p>
-                            <strong className="m-1">${item.our_price}</strong>
-                        </div>
-                    </div>
+    return (
+        <tr className="p-4">
+            <td>
+                <div className="d-flex flex-row w-50">
+                    <img
+                        className="m-2"
+                        style={{ height: 50, width: 50 }}
+                        src="/images/product.png"
+                    />
                     <div>
-                        <div className="flex-between">
-                            <QuantityControl onChange={(count) => { }} />
-                            <p className="m-1" onClick={() => removeItem(item)}>
-                                🗑️
-                            </p>
-                        </div>
+                        <h6>
+                            <strong>{item.name}</strong>
+                        </h6>
+                        <p>{item.color}</p>
                     </div>
                 </div>
-            </Card.Body>
-        </Card>
+            </td>
+            <td className="w-25">
+                <QuantityControl
+                    onChange={(count) => {
+                        setCount(count);
+                    }}
+                />
+            </td>
+            <td className="w-25">
+                <strong>${parseInt(item.our_price as string) * currentCount}</strong>
+            </td>
+            <td>
+                <Button variant="link" onClick={() => removeItem(item)}>
+                    Remove
+                </Button>
+            </td>
+        </tr>
     );
 };
 

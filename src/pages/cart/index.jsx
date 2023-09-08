@@ -1,6 +1,6 @@
 import { Layout, Page } from "@/shared/components";
 import CartItem from "@/shared/components/purchase/CartItem";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Table } from "react-bootstrap";
 import useCart from "@/shared/hooks/store/useCheckout";
 
 const Cart = () => {
@@ -25,9 +25,19 @@ const Cart = () => {
         }
       >
         {onCart.length > 0 ? (
-          onCart.map((item, idx) => {
-            return <CartItem item={item} key={idx} />;
-          })
+          <Table>
+            <thead>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th />
+            </thead>
+            <tbody>
+              {onCart.map((item, idx) => {
+                return <CartItem item={item} key={idx} />;
+              })}
+            </tbody>
+          </Table>
         ) : (
           <div>Your cart is empty</div>
         )}
