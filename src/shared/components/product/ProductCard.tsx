@@ -6,6 +6,7 @@ import useCart from "@/shared/hooks/store/useCheckout";
 import { toast } from "react-hot-toast";
 import ProductImage from "./ProductImage";
 import React from "react";
+import useAudio from "@/shared/hooks/useAudio";
 
 interface ProductCardProps {
     product: Product;
@@ -13,6 +14,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { onCart, addCart } = useCart();
+    const { toggle: playSuccess } = useAudio("/success.m4a");
+    const { toggle: playFailed } = useAudio("/failed.m4a");
 
     return (
         <motion.div
@@ -39,8 +42,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                             };
 
                             if (!onCart.some((item) => item.id == product.id)) {
+                                playSuccess();
                                 toast.promise(Promise.resolve(addCart(product)), responses);
                             } else {
+                                playFailed();
                                 toast.error(`${product.name} already exists in the cart.`);
                             }
                         }}
