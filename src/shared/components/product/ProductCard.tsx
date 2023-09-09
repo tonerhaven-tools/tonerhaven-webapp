@@ -8,6 +8,8 @@ import ProductImage from "./ProductImage";
 import React from "react";
 import useAudio from "@/shared/hooks/useAudio";
 
+import { useNavigate } from "react-router-dom";
+
 interface ProductCardProps {
     product: Product;
 }
@@ -16,6 +18,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { onCart, addCart } = useCart();
     const { toggle: playSuccess } = useAudio("/success.m4a");
     const { toggle: playFailed } = useAudio("/failed.m4a");
+
+    const navigate = useNavigate();
+
+    const handleAdd = () => {
+        const responses = {
+            loading: "Adding to cart, please wait...",
+            success: `Item ${product.name} added`,
+            error: "Something went wrong.",
+        };
+
+        if (!onCart.some((item) => item.id == product.id)) {
+            playSuccess();
+            toast.promise(Promise.resolve(addCart(product)), responses);
+        } else {
+            playFailed();
+            toast.error(`${product.name} already exists in the cart.`);
+        }
+    };
+
+    const gotoProductDetails = () => {
+        navigate(`/products/${product.id}`);
+    };
 
     return (
         <motion.div
@@ -26,31 +50,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
             <Card className="product border-0 bg-light">
                 <ProductImage product={product} />
-                <Card.Body>
+                <Card.Body style={{ cursor: "pointer" }} onClick={gotoProductDetails}>
                     <Card.Title className={"name"}>{product.name}</Card.Title>
                     <Card.Subtitle className={"price"}>
                         ${product.our_price}
                     </Card.Subtitle>
                 </Card.Body>
                 <Card.Footer className="border-0">
-                    <button
-                        onClick={() => {
-                            const responses = {
-                                loading: "Adding to cart, please wait...",
-                                success: `Item ${product.name} added`,
-                                error: "Something went wrong.",
-                            };
-
-                            if (!onCart.some((item) => item.id == product.id)) {
-                                playSuccess();
-                                toast.promise(Promise.resolve(addCart(product)), responses);
-                            } else {
-                                playFailed();
-                                toast.error(`${product.name} already exists in the cart.`);
-                            }
-                        }}
-                        className={"add-cart"}
-                    >
+                    <button onClick={handleAdd} className={"add-cart"}>
                         🛒 Add to cart
                     </button>
                 </Card.Footer>

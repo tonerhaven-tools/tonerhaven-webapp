@@ -1,4 +1,4 @@
-import DefaultPage from "./DefaultPage";
+import DefaultPage from "@/shared/components/default_pages/DefaultPage";
 
 const NotAuthorized = () => {
   return <DefaultPage statusCode={401} />;

@@ -4,6 +4,8 @@ import ContentLoader from "react-content-loader";
 import { Product } from "types/global.d.ts";
 import { server_url } from "@/shared/http/ServerAxios";
 import { Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 
 interface ProductImageProps {
     product: Product;
@@ -12,9 +14,16 @@ interface ProductImageProps {
 const ProductImage: React.FC<ProductImageProps> = ({ product }) => {
     const [isLoading, setLoading] = useState(true);
 
+    const navigate = useNavigate();
+
     const onImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
         const img = e.currentTarget;
         img.src = "/images/product.png";
+    };
+
+
+    const gotoProductDetails = () => {
+        navigate(`/products/${product.id}`);
     };
 
     useEffect(() => {
@@ -43,7 +52,8 @@ const ProductImage: React.FC<ProductImageProps> = ({ product }) => {
         );
 
     return (
-        <img
+        <img style={{ cursor: "pointer" }}
+            onClick={gotoProductDetails}
             id={`product-img-${product.name}`}
             className={"img-responsive"}
             src={`${server_url}/storage/uploads/products/${product.thumbnail}`}

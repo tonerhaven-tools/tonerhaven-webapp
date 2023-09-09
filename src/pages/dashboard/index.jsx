@@ -1,30 +1,25 @@
-import {Layout, Page} from "@/shared/components";
-import {NotAuthorized} from "@/shared/components/default_pages";
-import {useAuth0} from "@auth0/auth0-react";
-import {useEffect, useState} from "react";
-import DashOverview from "./components/overview"
-import DashProducts from "./components/products"
-import "../../styles/dashboard.scss"
+import { Page, SecuredLayout } from "@/shared/components";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
+import DashOverview from "./components/overview";
+import DashProducts from "./components/products";
+import "../../styles/dashboard.scss";
 
 const Root = () => {
-  const {user, isAuthenticated} = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [activePage, setActivePage] = useState(2);
 
   useEffect(() => {
     console.log("user: ", user);
   }, []);
 
-
   return (
-    <Page title={"Toner Haven | Your one stop shop for toners!"}> <Layout>
-
-      {!isAuthenticated ? (
-        <NotAuthorized/>
-      ) : (
+    <Page title={"Toner Haven | Your one stop shop for toners!"}>
+      <SecuredLayout>
         <div className="row">
           <div className="col-md-3">
             <h3>Menu</h3>
-            <br/>
+            <br />
 
             <div className="sidebar">
               <ul>
@@ -39,13 +34,13 @@ const Root = () => {
 
           <div className="col-md-9">
             <div className={"content"}>
-              {activePage == 1 && (<DashOverview/>)}
-              {activePage == 2 && (<DashProducts/>)}
+              {activePage == 1 && <DashOverview />}
+              {activePage == 2 && <DashProducts />}
             </div>
           </div>
         </div>
-      )}
-    </Layout> </Page>
+      </SecuredLayout>
+    </Page>
   );
 };
 

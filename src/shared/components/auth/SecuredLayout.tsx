@@ -1,9 +1,9 @@
 import React, { ReactNode, Suspense } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { NotAuthorized } from "@/shared/components/default_pages";
 import { Container } from "react-bootstrap";
 import LayoutHeader from "../LayoutHeader";
 import { Toaster } from "react-hot-toast";
+import NotAuthorized from "@/pages/401";
 
 const AccountChecks = React.lazy(() => import("../AccountChecks"));
 const LiveChat = React.lazy(() => import("../LiveChat"));
@@ -33,6 +33,17 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
             </>
         );
 
+    if (!isAuthenticated)
+        return (
+            <>
+                <Appbar />
+                <Container className={"mt-3"}>
+                    <NotAuthorized />
+                </Container>
+                <Footer />
+            </>
+        );
+
     return (
         <Suspense>
             <LiveChat />
@@ -42,7 +53,7 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
 
             <Container className="mt-3">
                 <LayoutHeader header={header} />
-                {isAuthenticated ? children : <NotAuthorized />}
+                {children}
             </Container>
             <Footer />
         </Suspense>

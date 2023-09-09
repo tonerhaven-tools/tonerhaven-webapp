@@ -5,6 +5,9 @@ import { components, hooks } from '@generouted/solid-router/client'
 
 export type Path =
   | `/`
+  | `/401`
+  | `/403`
+  | `/500`
   | `/app`
   | `/app/orders`
   | `/app/profile`
