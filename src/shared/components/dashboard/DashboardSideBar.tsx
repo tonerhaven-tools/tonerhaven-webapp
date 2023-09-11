@@ -1,6 +1,12 @@
 import useDashboardSidebar from "@/shared/hooks/store/useDashboardSidebar";
 import SiteLogo from "../Logo";
 import { Link } from "react-router-dom";
+import { Button, CloseButton } from "react-bootstrap";
+import {
+    BoxArrowInDownRight,
+    BoxArrowRight,
+    DoorClosed,
+} from "react-bootstrap-icons";
 
 const DashboardSidebar = () => {
     return (
@@ -19,7 +25,11 @@ const DashboardSidebar = () => {
                 </ul>
             </div>
             <div className="sidebar-footer">
-                <p>&copy; 2023 Your Company</p>
+                <Link to={"/"}>
+                    <Button variant="outline-danger" className="w-100">
+                        Leave Dashboard <BoxArrowRight />
+                    </Button>
+                </Link>
             </div>
         </div>
     );
