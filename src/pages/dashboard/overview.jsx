@@ -4,7 +4,7 @@ const Overview = () => {
   return (
     <Page title="TonerHaven | Dashboard">
       <DashboardLayout>
-        <h1>Test</h1>
+        <h1>Welcome to tonerhaven dashboard!</h1>
       </DashboardLayout>
     </Page>
   );

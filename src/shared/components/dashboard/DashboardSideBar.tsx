@@ -16,8 +16,6 @@ const DashboardSidebar = () => {
                     <li>
                         <Link to={"/dashboard/products"}>Products</Link>
                     </li>
-
-                    {/* Add more navigation items as needed */}
                 </ul>
             </div>
             <div className="sidebar-footer">

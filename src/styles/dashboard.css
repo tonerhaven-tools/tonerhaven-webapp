@@ -6,10 +6,15 @@
   font-size: 24px; /* Adjust the font size as needed */
 }
 
+
+
 .dashboard-sidebar {
+  border-right: solid;
+  border-width: 1px;
+  border-color: #dcdde1;
   min-width: 300px;
   flex: 0 0 auto;
-  background-color: #bdc3c7;
+  background-color: #f5f6fa;
   padding: 20px;
   height: 100vh;
 }
@@ -20,7 +25,6 @@
   background-color: #fff;
 }
 
-
 .dashboard-sidebar-footer {
   margin-top: auto; /* Push the footer to the bottom of the sidebar */
   text-align: center; /* Center-align the footer content */
@@ -30,7 +34,6 @@
 .dashboard-sidebar-footer p {
   font-size: 14px; /* Adjust the font size as needed */
 }
-
 
 .navigation-items ul {
   list-style: none; /* Remove bullet points from the list */
@@ -43,13 +46,12 @@
 }
 
 .navigation-items a {
-  padding: 10px;
+  padding: 5px;
   text-decoration: none; /* Remove underlines from links */
-  color: #fff; /* Link text color */
+  color: #212121; /* Link text color */
   display: block; /* Make links block-level for easier clicking */
 }
 
 .navigation-items a:hover {
-  background-color: #555; /* Highlight on hover */
   border-radius: 5px; /* Add rounded corners on hover */
 }
