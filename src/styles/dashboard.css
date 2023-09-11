@@ -1,0 +1,55 @@
+.dashboard-container {
+  display: flex;
+}
+
+.sidebar-header h1 {
+  font-size: 24px; /* Adjust the font size as needed */
+}
+
+.dashboard-sidebar {
+  min-width: 300px;
+  flex: 0 0 auto;
+  background-color: #bdc3c7;
+  padding: 20px;
+  height: 100vh;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}
+
+
+.dashboard-sidebar-footer {
+  margin-top: auto; /* Push the footer to the bottom of the sidebar */
+  text-align: center; /* Center-align the footer content */
+  padding-top: 20px; /* Add spacing above the footer content */
+}
+
+.dashboard-sidebar-footer p {
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
+
+.navigation-items ul {
+  list-style: none; /* Remove bullet points from the list */
+  padding: 0;
+}
+
+.navigation-items li {
+  padding: 3px;
+  margin-top: 10px; /* Add spacing between list items */
+}
+
+.navigation-items a {
+  padding: 10px;
+  text-decoration: none; /* Remove underlines from links */
+  color: #fff; /* Link text color */
+  display: block; /* Make links block-level for easier clicking */
+}
+
+.navigation-items a:hover {
+  background-color: #555; /* Highlight on hover */
+  border-radius: 5px; /* Add rounded corners on hover */
+}

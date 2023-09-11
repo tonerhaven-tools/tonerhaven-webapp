@@ -15,8 +15,8 @@ export type Path =
   | `/checkout`
   | `/contact-us`
   | `/dashboard`
-  | `/dashboard/components/overview`
-  | `/dashboard/components/products`
+  | `/dashboard/overview`
+  | `/dashboard/products`
   | `/products`
   | `/products/:id`
 

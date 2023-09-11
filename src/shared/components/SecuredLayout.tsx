@@ -1,14 +1,14 @@
 import React, { ReactNode, Suspense } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Container } from "react-bootstrap";
-import LayoutHeader from "../LayoutHeader";
+import LayoutHeader from "@/shared/components/LayoutHeader";
 import { Toaster } from "react-hot-toast";
 import NotAuthorized from "@/pages/401";
 
-const AccountChecks = React.lazy(() => import("../AccountChecks"));
-const LiveChat = React.lazy(() => import("../LiveChat"));
-const Appbar = React.lazy(() => import("../Appbar"));
-const Footer = React.lazy(() => import("../Footer"));
+const AccountChecks = React.lazy(() => import("./AccountChecks"));
+const LiveChat = React.lazy(() => import("./LiveChat"));
+const Appbar = React.lazy(() => import("./Appbar"));
+const Footer = React.lazy(() => import("./Footer"));
 
 /// Contains layout that are required to be secured
 interface SecuredLayoutProps {

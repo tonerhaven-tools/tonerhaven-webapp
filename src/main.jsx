@@ -5,6 +5,8 @@ import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "@/styles/toner-haven.scss";
+import "@/styles/dashboard.css";
+
 import "nprogress/nprogress.css";
 
 import { Auth0Provider } from "@auth0/auth0-react";
