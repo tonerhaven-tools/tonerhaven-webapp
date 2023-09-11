@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Container } from "react-bootstrap";
 import { Toaster } from "react-hot-toast";
 import DashboardSidebar from "./dashboard/DashboardSideBar";
+import NotAuthorized from "@/pages/401";
 
 /// Contains layout that are required to be secured
 interface DashboardLayoutProps {
@@ -15,7 +16,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
     if (isLoading) return "Loading...";
 
-    if (!isAuthenticated) return "Authenticating...";
+    if (!isAuthenticated) return <NotAuthorized />;
 
     return (
         <Suspense>
