@@ -12,6 +12,7 @@ export type Path =
   | `/app/orders`
   | `/app/profile`
   | `/cart`
+  | `/checkout`
   | `/contact-us`
   | `/dashboard`
   | `/dashboard/components/overview`
