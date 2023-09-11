@@ -165,7 +165,7 @@ export default function Overview() {
       <CustomModal active={modalActive} title={"Add new Product"}>
         <ModalBody>
           <div className={'form-body'}>
-            <input type="text" ref={ref_id}/>
+            <input type="text" ref={ref_id} hidden={true}/>
             <div className="row">
               <div className="col-md-6">
                 <div className={'form-group'}>
