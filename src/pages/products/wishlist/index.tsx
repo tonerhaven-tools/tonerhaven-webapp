@@ -11,9 +11,10 @@ const ProductWishlist: React.FC = () => {
                 header="My Wish list"
                 headerOptions={
                     <Link to={"/cart"}>
-                        <Button size="sm"
-                            className="p-2"
-                            variant="light"
+                        <Button
+                            size="sm"
+                            className="m-1"
+                            variant="outline-dark"
                             onClick={() => {
                                 window.scrollTo({
                                     top: 0,
@@ -21,7 +22,7 @@ const ProductWishlist: React.FC = () => {
                                 });
                             }}
                         >
-                            <Cart /> Go to cart
+                            <Cart /> My Cart
                         </Button>
                     </Link>
                 }
