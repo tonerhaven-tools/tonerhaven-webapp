@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import DashboardSidebar from "./dashboard/DashboardSideBar";
 import NotAuthorized from "@/pages/401";
 import { motion } from "framer-motion";
+import OnLoadAnimator from "./OnLoadAnimator";
 
 /// Contains layout that are required to be secured
 interface DashboardLayoutProps {
@@ -23,14 +24,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <Suspense>
             <div className="dashboard-container">
                 <DashboardSidebar />
-                <motion.div
-                    className="dashboard-content"
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ type: "spring", damping: 10, stiffness: 100 }}
-                >
-                    {children}
-                </motion.div>
+                <div className="dashboard-content">
+                    <OnLoadAnimator>{children}</OnLoadAnimator>
+                </div>
             </div>
             <Toaster position="top-center" reverseOrder={false} />
         </Suspense>

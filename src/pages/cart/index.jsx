@@ -1,7 +1,7 @@
 import { Layout, Page } from "@/shared/components";
 import { Link } from "react-router-dom";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { BagCheck, ChevronLeft } from "react-bootstrap-icons";
+import { BagCheck, ChevronLeft, Heart } from "react-bootstrap-icons";
 import CartTable from "@/shared/components/purchase/CartTable";
 import useCart from "@/shared/hooks/store/useCheckout";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,14 @@ const Cart = () => {
         header="Shopping Cart"
         headerOptions={
           <>
+            <Button
+              variant="outline-dark"
+              className="m-1"
+              onClick={clearCart}
+              size="sm"
+            >
+              <Heart /> My Wishlist
+            </Button>
             <Button
               hidden={onCart.length <= 0}
               className="m-1"

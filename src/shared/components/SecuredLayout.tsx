@@ -5,6 +5,7 @@ import LayoutHeader from "@/shared/components/LayoutHeader";
 import { Toaster } from "react-hot-toast";
 import NotAuthorized from "@/pages/401";
 import { motion } from "framer-motion";
+import OnLoadAnimator from "./OnLoadAnimator";
 
 const AccountChecks = React.lazy(() => import("./AccountChecks"));
 const LiveChat = React.lazy(() => import("./LiveChat"));
@@ -54,15 +55,7 @@ const SecuredLayout: React.FC<SecuredLayoutProps> = ({
 
             <Container className="mt-3">
                 <LayoutHeader header={header} />
-
-                <motion.div
-                    className="content-spacer"
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ type: "spring", damping: 10, stiffness: 100 }}
-                >
-                    {children}
-                </motion.div>
+                <OnLoadAnimator>{children}</OnLoadAnimator>
             </Container>
             <Footer />
         </Suspense>
