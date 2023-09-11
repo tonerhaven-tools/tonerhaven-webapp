@@ -1,13 +1,17 @@
 import { Layout, Page } from "@/shared/components";
 import { Link } from "react-router-dom";
-
 import { Col, Container, Row, Button } from "react-bootstrap";
 import { BagCheck, ChevronLeft } from "react-bootstrap-icons";
 import CartTable from "@/shared/components/purchase/CartTable";
 import useCart from "@/shared/hooks/store/useCheckout";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { clearCart, onCart } = useCart();
+  const navigate = useNavigate();
+  const goToCheckout = () => {
+    navigate("/checkout");
+  };
 
   return (
     <Page title={"Toner Haven | Your Cart"}>
@@ -44,7 +48,7 @@ const Cart = () => {
               <span className="m-1">Continue Shopping</span>
             </Button>
           </Link>
-          <Button className="p-2" hidden={onCart.length <= 0}>
+          <Button onClick={goToCheckout} className="p-2" hidden={onCart.length <= 0}>
             <BagCheck className="m-1" />
             <span className="m-1">Checkout</span>
           </Button>
