@@ -6,7 +6,7 @@ import DashProducts from "./components/products";
 import "../../styles/dashboard.scss";
 
 const Root = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const [activePage, setActivePage] = useState(2);
 
   useEffect(() => {

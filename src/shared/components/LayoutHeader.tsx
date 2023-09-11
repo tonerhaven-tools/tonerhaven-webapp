@@ -12,9 +12,9 @@ const LayoutHeader: React.FC<LayoutHeaderProps> = ({
 }) => {
     return (
         <div className="flex-between">
-            <h2 hidden={!header}>
+            <h4 hidden={!header}>
                 <strong>{header}</strong>
-            </h2>
+            </h4>
             <div hidden={!options || !header}>
                 {options}
             </div>

@@ -44,13 +44,15 @@ const Cart = () => {
                 });
               }}
             >
-              <ChevronLeft className="m-1" />
-              <span className="m-1">Continue Shopping</span>
+              <ChevronLeft /> Continue Shopping
             </Button>
           </Link>
-          <Button onClick={goToCheckout} className="p-2" hidden={onCart.length <= 0}>
-            <BagCheck className="m-1" />
-            <span className="m-1">Checkout</span>
+          <Button
+            onClick={goToCheckout}
+            className="p-2"
+            hidden={onCart.length <= 0}
+          >
+            <BagCheck /> Checkout
           </Button>
         </div>
       </Layout>

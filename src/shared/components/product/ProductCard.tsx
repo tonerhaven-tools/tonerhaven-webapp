@@ -15,11 +15,12 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+    const navigate = useNavigate();
+
     const { onCart, addCart } = useCart();
     const { toggle: playSuccess } = useAudio("/success.m4a");
     const { toggle: playFailed } = useAudio("/failed.m4a");
 
-    const navigate = useNavigate();
 
     const handleAdd = () => {
         const responses = {
