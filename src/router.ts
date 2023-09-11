@@ -19,7 +19,7 @@ export type Path =
   | `/dashboard/products`
   | `/products`
   | `/products/:id`
-  | `/products/wishlist/ProductWishlist`
+  | `/products/wishlist`
 
 export type Params = {
   '/products/:id': { id: string }

@@ -19,14 +19,11 @@ const Cart = () => {
         header="Shopping Cart"
         headerOptions={
           <>
-            <Button
-              variant="outline-dark"
-              className="m-1"
-              onClick={clearCart}
-              size="sm"
-            >
-              <Heart /> My Wishlist
-            </Button>
+            <Link to={"/products/wishlist"}>
+              <Button variant="outline-dark" className="m-1" size="sm">
+                <Heart /> My Wishlist
+              </Button>
+            </Link>
             <Button
               hidden={onCart.length <= 0}
               className="m-1"
