@@ -21,7 +21,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { toggle: playSuccess } = useAudio("/success.m4a");
     const { toggle: playFailed } = useAudio("/failed.m4a");
 
-
     const handleAdd = () => {
         const responses = {
             loading: "Adding to cart, please wait...",
@@ -43,12 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     };
 
     return (
-        <motion.div
-            className="col-md-3"
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", damping: 10, stiffness: 100 }}
-        >
+        <div className="col-md-3">
             <Card className="product border-0 bg-light">
                 <ProductImage product={product} />
                 <Card.Body style={{ cursor: "pointer" }} onClick={gotoProductDetails}>
@@ -63,7 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     </button>
                 </Card.Footer>
             </Card>
-        </motion.div>
+        </div>
     );
 };
 
